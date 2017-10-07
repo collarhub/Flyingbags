@@ -1,4 +1,4 @@
-package com.example.user.flyingbags.presenter;
+package net.flyingbags.flyingapps.presenter;
 
 import android.app.Activity;
 

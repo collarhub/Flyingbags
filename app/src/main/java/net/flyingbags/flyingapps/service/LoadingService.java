@@ -1,10 +1,10 @@
-package com.example.user.flyingbags.service;
+package net.flyingbags.flyingapps.service;
 
 import android.app.Activity;
 import android.content.Intent;
 
-import com.example.user.flyingbags.presenter.LoadingPresenter;
-import com.example.user.flyingbags.view.LoginActivity;
+import net.flyingbags.flyingapps.presenter.LoadingPresenter;
+import net.flyingbags.flyingapps.view.LoginActivity;
 
 /**
  * Created by User on 2017-10-07.

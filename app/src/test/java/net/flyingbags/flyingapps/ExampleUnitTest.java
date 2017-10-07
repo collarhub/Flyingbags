@@ -1,4 +1,4 @@
-package com.example.user.flyingbags;
+package net.flyingbags.flyingapps;
 
 import org.junit.Test;
 

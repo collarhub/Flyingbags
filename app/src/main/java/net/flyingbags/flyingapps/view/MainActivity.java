@@ -1,9 +1,9 @@
-package com.example.user.flyingbags.view;
+package net.flyingbags.flyingapps.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.user.flyingbags.R;
+import net.flyingbags.flyingapps.R;
 
 /**
  * Created by User on 2017-10-07.

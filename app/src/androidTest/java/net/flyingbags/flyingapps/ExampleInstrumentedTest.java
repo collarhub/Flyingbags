@@ -1,4 +1,4 @@
-package com.example.user.flyingbags;
+package net.flyingbags.flyingapps;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.user.flyingbags", appContext.getPackageName());
+        assertEquals("net.flyingbags.flyingapps", appContext.getPackageName());
     }
 }

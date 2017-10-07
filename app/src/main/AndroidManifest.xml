@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.user.flyingbags">
+    package="net.flyingbags.flyingapps">
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,7 @@
         android:hardwareAccelerated="false"
         android:largeHeap="true">
         <activity
-            android:name=".view.LoadingActivity"
+            android:name="net.flyingbags.flyingapps.view.LoadingActivity"
             android:theme="@style/LoadingTheme"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -22,11 +22,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.LoginActivity"
+            android:name="net.flyingbags.flyingapps.view.LoginActivity"
             android:theme="@style/LoginTheme"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.MainActivity">
+        <activity android:name="net.flyingbags.flyingapps.view.MainActivity">
+        </activity>
+        <activity android:name="net.flyingbags.flyingapps.view.Login2Activity">
         </activity>
     </application>
 

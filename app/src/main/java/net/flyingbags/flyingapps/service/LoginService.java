@@ -1,4 +1,4 @@
-package com.example.user.flyingbags.service;
+package net.flyingbags.flyingapps.service;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,9 +8,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.example.user.flyingbags.R;
-import com.example.user.flyingbags.presenter.LoginPresenter;
-import com.example.user.flyingbags.view.MainActivity;
+import net.flyingbags.flyingapps.R;
+import net.flyingbags.flyingapps.presenter.LoginPresenter;
+import net.flyingbags.flyingapps.view.MainActivity;
 
 /**
  * Created by User on 2017-10-07.

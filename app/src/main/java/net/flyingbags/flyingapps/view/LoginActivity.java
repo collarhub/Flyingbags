@@ -1,4 +1,4 @@
-package com.example.user.flyingbags.view;
+package net.flyingbags.flyingapps.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,16 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.user.flyingbags.R;
-import com.example.user.flyingbags.presenter.LoginPresenter;
-import com.example.user.flyingbags.service.LoginService;
+import net.flyingbags.flyingapps.R;
+import net.flyingbags.flyingapps.presenter.LoginPresenter;
+import net.flyingbags.flyingapps.service.LoginService;
 
 /**
  * Created by User on 2017-10-07.
  * 두번째 activity 로그인 화면
  */
 
-public class LoginActivity extends AppCompatActivity implements LoginPresenter.view{
+public class LoginActivity extends AppCompatActivity implements LoginPresenter.view {
     ConstraintLayout constraintLayout;  // background layout(배경 touch시 editText focus out시키는 용도)
     LoginService loginService;          // presenter
     EditText editTextPasswd;            // passwd 입력 editText(완료 누르면 sign in 버튼 누른효과)

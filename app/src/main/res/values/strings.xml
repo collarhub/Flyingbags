@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Flyingbags</string>
+
+    <string name="auth_failed">auth_failed</string>
+    <string name="id">id</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="new_account">new account</string>
+    <string name="testemail">ernest0610@naver.com</string>
+    <string name="testpassword">testpassword</string>
+    <string name="testname">Ernest Bae</string>
 </resources>
