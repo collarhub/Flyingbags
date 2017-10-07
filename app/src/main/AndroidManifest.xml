@@ -12,7 +12,7 @@
         android:hardwareAccelerated="false"
         android:largeHeap="true">
         <activity
-            android:name="net.flyingbags.flyingapps.view.LoadingActivity"
+            android:name=".view.LoadingActivity"
             android:theme="@style/LoadingTheme"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -22,14 +22,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="net.flyingbags.flyingapps.view.LoginActivity"
+            android:name=".view.LoginActivity"
             android:theme="@style/LoginTheme"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name="net.flyingbags.flyingapps.view.MainActivity">
+        <activity android:name=".view.MainActivity">
         </activity>
-        <activity android:name="net.flyingbags.flyingapps.view.Login2Activity">
+        <activity android:name=".view.Login2Activity">
         </activity>
+        <activity android:name=".view.ProfileActivity" />
     </application>
 
 </manifest>

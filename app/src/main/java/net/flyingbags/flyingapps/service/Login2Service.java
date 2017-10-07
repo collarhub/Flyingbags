@@ -1,8 +1,11 @@
 package net.flyingbags.flyingapps.service;
 
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
+import net.flyingbags.flyingapps.R;
 import net.flyingbags.flyingapps.presenter.Login2Presenter;
 import net.flyingbags.flyingapps.presenter.LoginPresenter;
 
@@ -49,13 +52,12 @@ public class Login2Service implements Login2Presenter.presenter {
     public void onDestroy() {
 
     }
-
+    //// TODO: 17. 10. 8 add user profile to database and casting view to activity
     public void createUser(String email, String password, String tempname){
         final String memail = email;
         final String mpassword = password;
-        mAuth.createUserWithEmailAndPassword
-                (email, password)
-                .addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword (email, password)
+                .addOnCompleteListener((AppCompatActivity)view, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
@@ -63,7 +65,7 @@ public class Login2Service implements Login2Presenter.presenter {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            view.onCreateUserFailed();
+
                         }else{
                             signIn(memail, mpassword);
                         }
@@ -73,7 +75,7 @@ public class Login2Service implements Login2Presenter.presenter {
 
     public void signIn(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener((AppCompatActivity)view, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
@@ -84,29 +86,15 @@ public class Login2Service implements Login2Presenter.presenter {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
                             view.onSignInFailed();
                         }else {
-                            view.onBackPressed();
+                            view.showProfile();
                         }
                     }
                 });
     }
+
+    /*
 
     public void firstsignIn(String email, String password){
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            view.onSignInFailed();
-                        }else {
-                            view.onBackPressed();
-                        }
-                    }
-                });
     }
+    */
 }

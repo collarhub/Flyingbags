@@ -15,6 +15,8 @@ public class Login2Presenter {
         void onCreateUserSuccess();
         void onSignInSuccess();
         void onSignInFailed();
+
+        void showProfile();
     }
 
     public interface presenter extends net.flyingbags.flyingapps.presenter.presenter {

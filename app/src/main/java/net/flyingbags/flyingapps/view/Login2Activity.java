@@ -1,5 +1,6 @@
 package net.flyingbags.flyingapps.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,7 +18,7 @@ public class Login2Activity extends AppCompatActivity implements Login2Presenter
 
     private static final String TAG = Login2Activity.class.getSimpleName();
 
-    private Login2Service loginPresenter = new Login2Service(this);
+    private Login2Service login2Service = new Login2Service(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +35,14 @@ public class Login2Activity extends AppCompatActivity implements Login2Presenter
         button_newAccount.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                loginPresenter.createUser(editText_id.getText().toString(), editText_password.getText().toString(), editText_testname.getText().toString());
+                login2Service.createUser(editText_id.getText().toString(), editText_password.getText().toString(), editText_testname.getText().toString());
             }
         });
 
         button_login.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                loginPresenter.signIn(editText_id.getText().toString(), editText_password.getText().toString());
+                login2Service.signIn(editText_id.getText().toString(), editText_password.getText().toString());
             }
         });
     }
@@ -82,5 +83,11 @@ public class Login2Activity extends AppCompatActivity implements Login2Presenter
     @Override
     public void onSignInFailed() {
         Toast.makeText(Login2Activity.this, R.string.auth_failed, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showProfile() {
+        Intent intent = new Intent(Login2Activity.this, ProfileActivity.class);
+        startActivity(intent);
     }
 }
