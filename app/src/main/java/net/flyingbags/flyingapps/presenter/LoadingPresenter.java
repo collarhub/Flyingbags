@@ -14,6 +14,6 @@ public class LoadingPresenter {
     }
 
     public interface presenter {
-        void loading(Activity activity);
+        void loading();
     }
 }

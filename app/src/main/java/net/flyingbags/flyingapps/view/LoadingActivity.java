@@ -15,19 +15,19 @@ import net.flyingbags.flyingapps.service.LoadingService;
 
 public class LoadingActivity extends AppCompatActivity implements LoadingPresenter.view {
 
-    LoadingService loadingService;
+    private LoadingService loadingService;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // presenter를 통해서 2초 loading
         // mvp로 안해도 되는데 그냥 통일성 있게 해봤음
-        loadingService = new LoadingService();
+        loadingService = new LoadingService(this);
         loading();
     }
 
     @Override
     public void loading() {
-        loadingService.loading(this);
+        loadingService.loading();
     }
 }

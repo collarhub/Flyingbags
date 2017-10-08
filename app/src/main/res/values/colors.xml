@@ -6,4 +6,5 @@
     <color name="transparentPrimaryDark">#0000AE8D</color>
     <color name="colorMessage">#3a609b</color>
     <color name="transparentWhite">#a0ffffff</color>
+    <color name="navBack">#fafafa</color>
 </resources>

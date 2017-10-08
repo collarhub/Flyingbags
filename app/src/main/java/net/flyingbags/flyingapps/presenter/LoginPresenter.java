@@ -14,7 +14,7 @@ public class LoginPresenter {
     }
 
     public interface presenter {
-        void focusOut(Activity activity);
-        void signIn(Activity activity);
+        void focusOut();
+        void signIn();
     }
 }

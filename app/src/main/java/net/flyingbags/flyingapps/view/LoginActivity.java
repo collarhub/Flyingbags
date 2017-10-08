@@ -19,16 +19,16 @@ import net.flyingbags.flyingapps.service.LoginService;
  */
 
 public class LoginActivity extends AppCompatActivity implements LoginPresenter.view {
-    ConstraintLayout constraintLayout;  // background layout(배경 touch시 editText focus out시키는 용도)
-    LoginService loginService;          // presenter
-    EditText editTextPasswd;            // passwd 입력 editText(완료 누르면 sign in 버튼 누른효과)
-    Button buttonSignIn;
+    private ConstraintLayout constraintLayout;  // background layout(배경 touch시 editText focus out시키는 용도)
+    private LoginService loginService;          // presenter
+    private EditText editTextPasswd;            // passwd 입력 editText(완료 누르면 sign in 버튼 누른효과)
+    private Button buttonSignIn;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginService = new LoginService();
+        loginService = new LoginService(this);
 
         // 배경 클릭 이벤트
         constraintLayout = (ConstraintLayout) findViewById(R.id.login_layout);
@@ -64,11 +64,11 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
 
     @Override
     public void focusOut() {
-        loginService.focusOut(this);
+        loginService.focusOut();
     }
 
     @Override
     public void signIn() {
-        loginService.signIn(this);
+        loginService.signIn();
     }
 }
