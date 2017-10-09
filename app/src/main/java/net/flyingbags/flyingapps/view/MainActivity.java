@@ -1,16 +1,10 @@
 package net.flyingbags.flyingapps.view;
 
-import android.content.Intent;
-import android.support.annotation.Px;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TabHost;
-import android.widget.TabWidget;
 
 import net.flyingbags.flyingapps.R;
 import net.flyingbags.flyingapps.presenter.ActionBarPresenter;
@@ -20,13 +14,15 @@ import net.flyingbags.flyingapps.service.NavTabService;
 
 /**
  * Created by User on 2017-10-07.
- * 구현 안됨
+ *
  */
 
 public class MainActivity extends AppCompatActivity implements ActionBarPresenter.view, NavTabPresenter.view{
 
     private ActionBarService actionBarService;
-    /*private ImageButton imageButtonHome;*/
+    private View viewActionBar;
+    private ImageButton imageButtonHome;
+    private ImageButton imageButtonProfile;
     private NavTabService navTabService;
     private TabHost tabHost;
 
@@ -38,13 +34,22 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
         actionBarService = new ActionBarService(this, "My Location");
         showActionBar();
 
-        /*View view = getSupportActionBar().getCustomView();
-        imageButtonHome = (ImageButton) view.findViewById(R.id.home_button);
+        viewActionBar = getSupportActionBar().getCustomView();
+        imageButtonHome = (ImageButton) viewActionBar.findViewById(R.id.home_button);
         imageButtonHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showHome();
             }
-        });*/
+        });
+
+        imageButtonProfile = (ImageButton) viewActionBar.findViewById(R.id.profile_button);
+        imageButtonProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showProfile();
+            }
+        });
 
         navTabService = new NavTabService(this);
         showNavTab();
@@ -54,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
             @Override
             public void onTabChanged(String tabId) {
                 switch (tabId) {
+                    case "TAB0":
+                        setTitle("My Location");
+                        break;
                     case "TAB1":
                         setTitle("Notifications");
                         break;
@@ -65,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
                         break;
                     case "TAB4":
                         setTitle("Settings");
+                        break;
+                    case "TAB5":
+                        setTitle("My Profile");
                         break;
                 }
             }
@@ -84,5 +95,15 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
     @Override
     public void setTitle(String title) {
         actionBarService.setTitle(title);
+    }
+
+    @Override
+    public void showHome() {
+        navTabService.showHome();
+    }
+
+    @Override
+    public void showProfile() {
+        navTabService.showProfile();
     }
 }

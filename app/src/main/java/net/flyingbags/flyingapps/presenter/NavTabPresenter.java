@@ -7,9 +7,13 @@ package net.flyingbags.flyingapps.presenter;
 public class NavTabPresenter {
     public interface view {
         void showNavTab();
+        void showHome();
+        void showProfile();
     }
 
     public interface presenter {
         void showNavTab();
+        void showHome();
+        void showProfile();
     }
 }
