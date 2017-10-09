@@ -10,26 +10,76 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="0"
+        android:textColor="@color/zxing_possible_result_points"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.032" />
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButton_menu"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="right"
         android:background="@drawable/button_qr"
         android:padding="11dp"
         android:scaleType="fitCenter"
+        android:translationZ="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.952"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.964"
+        app:layout_constraintVertical_bias="0.965"
         app:srcCompat="@drawable/qrcode" />
+
+    <ImageButton
+        android:id="@+id/imageButton_scan"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_scan"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        android:translationZ="2dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.824"
+        app:srcCompat="@drawable/scan" />
+
+    <TextView
+        android:id="@+id/textView_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan QR code"
+        android:textColor="@android:color/white"
+        android:translationZ="2dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.754"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.803" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparentGray"
+        android:orientation="horizontal"
+        android:translationZ="1dp"
+        android:visibility="invisible"
+        android:id="@+id/transparentGray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
