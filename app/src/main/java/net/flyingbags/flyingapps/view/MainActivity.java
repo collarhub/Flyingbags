@@ -1,23 +1,28 @@
 package net.flyingbags.flyingapps.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 import net.flyingbags.flyingapps.R;
 import net.flyingbags.flyingapps.presenter.ActionBarPresenter;
+import net.flyingbags.flyingapps.presenter.MainPresenter;
 import net.flyingbags.flyingapps.presenter.NavTabPresenter;
 import net.flyingbags.flyingapps.service.ActionBarService;
+import net.flyingbags.flyingapps.service.MainService;
 import net.flyingbags.flyingapps.service.NavTabService;
+import net.flyingbags.flyingapps.service.Tab0Service;
 
 /**
  * Created by User on 2017-10-07.
  *
  */
 
-public class MainActivity extends AppCompatActivity implements ActionBarPresenter.view, NavTabPresenter.view{
+public class MainActivity extends AppCompatActivity implements ActionBarPresenter.view, NavTabPresenter.view, MainPresenter.view{
 
     private ActionBarService actionBarService;
     private View viewActionBar;
@@ -25,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
     private ImageButton imageButtonProfile;
     private NavTabService navTabService;
     private TabHost tabHost;
+    private MainService mainService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
                 }
             }
         });
+        mainService = new MainService(this);
     }
 
     @Override
@@ -105,5 +112,15 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
     @Override
     public void showProfile() {
         navTabService.showProfile();
+    }
+
+    @Override
+    public void verifyQR(int requestCode, int resultCode, Intent data) {
+        Toast.makeText(this, mainService.verifyQR(requestCode, resultCode, data), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        verifyQR(requestCode, resultCode, data);
     }
 }

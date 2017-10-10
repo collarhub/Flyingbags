@@ -13,6 +13,9 @@
         android:theme="@style/AppTheme"
         android:hardwareAccelerated="false"
         android:largeHeap="true">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBw5xn9pWy9p6XiXb6YD0Z9CBvSMBRa45s" />
         <activity
             android:name=".view.LoadingActivity"
             android:theme="@style/LoadingTheme"
@@ -30,9 +33,12 @@
         </activity>
         <activity android:name=".view.MainActivity">
         </activity>
+        <activity android:name=".view.ScheduleDeliveryActivity">
+        </activity>
         <activity android:name=".view.Login2Activity">
         </activity>
         <activity android:name=".view.ProfileActivity" />
+
     </application>
 
 </manifest>
