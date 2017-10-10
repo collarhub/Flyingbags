@@ -21,9 +21,7 @@ import java.util.concurrent.Executor;
  */
 
 public class Login2Service implements Login2Presenter.presenter {
-
-
-    private static final String TAG = LoginPresenter.class.getSimpleName();
+    private static final String TAG = Login2Service.class.getSimpleName();
 
     private Login2Presenter.view view;
     private FirebaseAuth mAuth;
