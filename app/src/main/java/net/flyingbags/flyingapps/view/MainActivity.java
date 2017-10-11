@@ -1,6 +1,9 @@
 package net.flyingbags.flyingapps.view;
 
+import android.app.FragmentManager;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -121,6 +124,28 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        verifyQR(requestCode, resultCode, data);
+        if(requestCode == MainPresenter.REQUEST_CODE_TAB) {
+            if(resultCode == MainPresenter.RESULT_HOME) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showHome();
+                    }
+                }, 0);
+            }
+            else if(resultCode == MainPresenter.RESULT_PROFILE) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showProfile();
+                    }
+                }, 0);
+            }
+        }
+        else {
+            verifyQR(requestCode, resultCode, data);
+        }
     }
 }

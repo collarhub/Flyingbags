@@ -24,10 +24,12 @@ public class MainService implements MainPresenter.presenter {
     @Override
     public String verifyQR(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result.getContents() == null)
+        if(result.getContents() == null) {
+            activity.startActivityForResult(new Intent(activity, ScheduleDeliveryActivity.class), MainPresenter.REQUEST_CODE_TAB);
             return "Scan Failed";
+        }
         else {
-            activity.startActivity(new Intent(activity, ScheduleDeliveryActivity.class));
+            activity.startActivityForResult(new Intent(activity, ScheduleDeliveryActivity.class), MainPresenter.REQUEST_CODE_TAB);
             return "Scan Success";
         }
     }

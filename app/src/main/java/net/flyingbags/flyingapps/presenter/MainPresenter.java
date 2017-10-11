@@ -7,6 +7,9 @@ import android.content.Intent;
  */
 
 public class MainPresenter {
+    public static final int REQUEST_CODE_TAB = 1001;
+    public static final int RESULT_HOME = 1002;
+    public static final int RESULT_PROFILE = 1003;
     public interface view {
         void verifyQR(int requestCode, int resultCode, Intent data);
     }
