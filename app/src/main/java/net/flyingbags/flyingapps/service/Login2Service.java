@@ -3,27 +3,16 @@ package net.flyingbags.flyingapps.service;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
-import net.flyingbags.flyingapps.R;
 import net.flyingbags.flyingapps.presenter.Login2Presenter;
-import net.flyingbags.flyingapps.presenter.LoginPresenter;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.concurrent.Executor;
-
-/**
- * Created by ernest on 17. 10. 7.
- */
-
 public class Login2Service implements Login2Presenter.presenter {
-
-
-    private static final String TAG = LoginPresenter.class.getSimpleName();
+    private static final String TAG = Login2Service.class.getSimpleName();
 
     private Login2Presenter.view view;
     private FirebaseAuth mAuth;
