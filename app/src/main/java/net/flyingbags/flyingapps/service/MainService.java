@@ -7,7 +7,6 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import net.flyingbags.flyingapps.presenter.MainPresenter;
-import net.flyingbags.flyingapps.view.LoginActivity;
 import net.flyingbags.flyingapps.view.ScheduleDeliveryActivity;
 
 /**

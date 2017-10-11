@@ -10,8 +10,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/id"
-        android:inputType="textPersonName"
-        android:text="@string/testemail" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editText_password"
@@ -19,8 +18,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/password"
-        android:inputType="textPassword"
-        android:text="@string/testpassword" />
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/editText_testname"
