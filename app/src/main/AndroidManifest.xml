@@ -35,8 +35,6 @@
         </activity>
         <activity android:name=".view.ScheduleDeliveryActivity">
         </activity>
-        <activity android:name=".view.Login2Activity">
-        </activity>
         <activity android:name=".view.ProfileActivity" />
 
     </application>

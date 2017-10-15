@@ -1,11 +1,9 @@
 package net.flyingbags.flyingapps.service;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 import net.flyingbags.flyingapps.presenter.LoadingPresenter;
-import net.flyingbags.flyingapps.view.Login2Activity;
 import net.flyingbags.flyingapps.view.LoginActivity;
 
 /**

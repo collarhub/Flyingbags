@@ -82,6 +82,7 @@ public class LoginService implements LoginPresenter.presenter {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        //task.getResult();
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
                         if (!task.isSuccessful()) {
                             view.onCreateUserFailed(); // create user failed
