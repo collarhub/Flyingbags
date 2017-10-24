@@ -2,10 +2,12 @@ package net.flyingbags.flyingapps.service;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TabHost;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import net.flyingbags.flyingapps.R;
 import net.flyingbags.flyingapps.presenter.MainPresenter;
 import net.flyingbags.flyingapps.view.ScheduleDeliveryActivity;
 

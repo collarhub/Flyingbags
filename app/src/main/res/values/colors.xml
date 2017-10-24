@@ -8,4 +8,10 @@
     <color name="transparentWhite">#a0ffffff</color>
     <color name="navBack">#fafafa</color>
     <color name="transparentGray">#40000000</color>
+    <color name="grayA1">#a1a1a1</color>
+    <color name="grayD3">#d3d2d3</color>
+    <color name="gray99">#999899</color>
+    <color name="grayF3">#f3f2f3</color>
+    <color name="gray4A">#4a4a4a</color>
+    <color name="gray9B">#9b9b9b</color>
 </resources>

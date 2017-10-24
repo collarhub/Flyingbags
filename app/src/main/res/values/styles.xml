@@ -17,4 +17,9 @@
         <item name="colorPrimaryDark">@color/transparentPrimaryDark</item>
         <item name="android:windowBackground">@drawable/login</item>
     </style>
-</resources>
+
+    <style name="CustomDayTextAppearance" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    </resources>

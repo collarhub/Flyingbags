@@ -5,6 +5,9 @@ package net.flyingbags.flyingapps.presenter;
  */
 
 public class ActionBarPresenter {
+    public static final int REQUEST_CODE_TAB = 1001;
+    public static final int RESULT_HOME = 1002;
+    public static final int RESULT_PROFILE = 1003;
     public interface view {
         void showActionBar();
         void setTitle(String title);
