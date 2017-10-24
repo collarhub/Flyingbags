@@ -28,11 +28,11 @@ public class MainService implements MainPresenter.presenter {
 
     private AppCompatActivity activity;
 
-    @Deprecated
+    /*@Deprecated
     public MainService(AppCompatActivity activity) {
         this.activity = activity;
         this.view = (MainPresenter.view) activity;
-    }
+    }*/
 
     public MainService(MainPresenter.view view) {
         this.view = view;

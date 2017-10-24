@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- UNSELECTED -->
+    <item android:state_checked="false">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="10dp"
+                        android:topLeftRadius="0dp"
+                        android:bottomLeftRadius="0dp" />
+                    <solid android:color="@android:color/white" />
+                    <stroke android:width="2dp"
+                        android:color="#979797" />
+                </shape>
+            </item>
+            <item android:drawable="@drawable/home_gray"
+                android:left="50dp"
+                android:top="10dp"
+                android:bottom="10dp"
+                android:right="87dp"/>
+            <item android:drawable="@drawable/home_text_gray"
+                android:left="68dp"
+                android:top="10dp"
+                android:bottom="10dp"
+                android:right="50dp" />
+        </layer-list>
+    </item>
+    <!-- SELECTED -->
+    <item android:state_checked="true">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="10dp"
+                        android:topLeftRadius="0dp"
+                        android:bottomLeftRadius="0dp" />
+                    <solid android:color="@color/colorPrimaryDark" />
+                    <stroke android:width="2dp"
+                        android:color="#979797" />
+                </shape>
+            </item>
+            <item android:drawable="@drawable/home_white"
+                android:left="50dp"
+                android:top="10dp"
+                android:bottom="10dp"
+                android:right="87dp"/>
+            <item android:drawable="@drawable/home_text_white"
+                android:left="68dp"
+                android:top="10dp"
+                android:bottom="10dp"
+                android:right="50dp" />
+        </layer-list>
+    </item>
+</selector>

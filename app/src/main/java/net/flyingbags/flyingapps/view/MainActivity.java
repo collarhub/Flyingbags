@@ -1,6 +1,9 @@
 package net.flyingbags.flyingapps.view;
 
+import android.app.FragmentManager;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.widget.TabHost;
 import android.widget.Toast;
 
 import net.flyingbags.flyingapps.R;
+import net.flyingbags.flyingapps.model.Invoice;
 import net.flyingbags.flyingapps.presenter.ActionBarPresenter;
 import net.flyingbags.flyingapps.presenter.MainPresenter;
 import net.flyingbags.flyingapps.presenter.NavTabPresenter;
@@ -16,6 +20,8 @@ import net.flyingbags.flyingapps.service.ActionBarService;
 import net.flyingbags.flyingapps.service.MainService;
 import net.flyingbags.flyingapps.service.NavTabService;
 import net.flyingbags.flyingapps.service.Tab0Service;
+
+import java.util.Vector;
 
 /**
  * Created by User on 2017-10-07.
@@ -121,6 +127,68 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        verifyQR(requestCode, resultCode, data);
+        if(requestCode == MainPresenter.REQUEST_CODE_TAB) {
+            if(resultCode == MainPresenter.RESULT_HOME) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showHome();
+                    }
+                }, 0);
+            }
+            else if(resultCode == MainPresenter.RESULT_PROFILE) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showProfile();
+                    }
+                }, 0);
+            }
+        }
+        else {
+            verifyQR(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    public void onGetInvoicesVectorFailed() {
+
+    }
+
+    @Override
+    public void onGetInvoicesVectorSuccess(Vector<String> invoices) {
+
+    }
+
+    @Override
+    public void onGetInvoiceSuccess(String invoice, Invoice presentInfo) {
+
+    }
+
+    @Override
+    public void onGetInvoiceFailed() {
+
+    }
+
+    @Override
+    public void onRegisterInvoiceOnNewOrderFailed() {
+
+    }
+
+    @Override
+    public void onRegisterInvoiceOnNewOrderSuccess() {
+
+    }
+
+    @Override
+    public void onRegisterInvoiceOnMyListFailed() {
+
+    }
+
+    @Override
+    public void onRegisterInvoiceOnMyListSuccess() {
+
     }
 }
