@@ -355,7 +355,7 @@
                             app:srcCompat="@drawable/plus" />
 
                         <TextView
-                            android:id="@+id/textView16"
+                            android:id="@+id/textView_small"
                             android:layout_width="22dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -393,7 +393,7 @@
                             app:srcCompat="@drawable/plus" />
 
                         <TextView
-                            android:id="@+id/textView17"
+                            android:id="@+id/textView_medium"
                             android:layout_width="22dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -431,7 +431,7 @@
                             app:srcCompat="@drawable/plus" />
 
                         <TextView
-                            android:id="@+id/textView18"
+                            android:id="@+id/textView_large"
                             android:layout_width="22dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

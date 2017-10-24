@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @IgnoreExtraProperties
 public class Invoice implements Serializable {
-
+    private String orderDate;
     private String deliveryType;
     private String target;
     private String departure;
@@ -21,7 +21,8 @@ public class Invoice implements Serializable {
         // Default constructor required for calls to DataSnapshot.getValue(newOrders.class)
     }
 
-    public Invoice(String deliveryType, String target, String departure, String minDateExpected, String maxDateExpected, String packageType, String price, String status, String location) {
+    public Invoice(String orderDate, String deliveryType, String target, String departure, String minDateExpected, String maxDateExpected, String packageType, String price, String status, String location) {
+        this.orderDate = orderDate;
         this.deliveryType = deliveryType;
         this.target = target;
         this.departure = departure;
@@ -31,6 +32,14 @@ public class Invoice implements Serializable {
         this.price = price;
         this.status = status;
         this.location = location;
+    }
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
     }
 
     public String getDeliveryType() {

@@ -27,7 +27,7 @@ public class AdminService implements AdminPresenter.presenter {
     // you can make "invoice code" by this method
     @Override
     public void generateInvoice(String invoice){
-        setInvoice(invoice, new Invoice("","","","","","","","undistributed",""));
+        setInvoice(invoice, new Invoice("","","","","","","","","undistributed",""));
     }
 
     // admin can get new orders that need to deliver.

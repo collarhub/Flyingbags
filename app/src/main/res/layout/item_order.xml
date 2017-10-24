@@ -19,14 +19,14 @@
             android:textColor="@color/gray99" />
 
         <TextView
-            android:id="@+id/textView20"
+            android:id="@+id/textView_order_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0123456789"
             android:textColor="@color/gray99" />
 
         <TextView
-            android:id="@+id/textView21"
+            android:id="@+id/textView_order_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -88,7 +88,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView31"
+                android:id="@+id/textView_package_type"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -104,7 +104,7 @@
                 android:textColor="@color/gray4A" />
 
             <TextView
-                android:id="@+id/textView33"
+                android:id="@+id/textView_price"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -150,7 +150,7 @@
                     android:textColor="@color/gray99" />
 
                 <TextView
-                    android:id="@+id/textView27"
+                    android:id="@+id/textView_sub_total"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -168,7 +168,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:id="@+id/textView30"
+                    android:id="@+id/textView_target"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -185,7 +185,7 @@
                     android:textColor="@color/colorPrimary" />
 
                 <TextView
-                    android:id="@+id/textView28"
+                    android:id="@+id/textView_total_price"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
