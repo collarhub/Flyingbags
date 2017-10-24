@@ -180,7 +180,7 @@ public class ScheduleDeliveryActivity extends AppCompatActivity implements Actio
         invoice.setMinDateExpected(minDateExpected);
         invoice.setMaxDateExpected(maxDateExpected);
 
-        mainService.registerInvoiceOnNewOrder(invoiceID, invoice);
+        mainService.registerInvoiceOnInvoices(invoiceID, invoice);
     }
 
     private void setPackageType() {
