@@ -29,7 +29,7 @@ public class MainPresenter {
     }
 
     public interface presenter {
-        void registerInvoiceOnNewOrder(final String invoice, Invoice contents);
+        void registerInvoiceOnInvoices(final String invoice, Invoice contents);
         void registerInvoiceOnMyList(final String invoice);
         void getInvoicesVector();
         void getInvoice(final String invoice);
