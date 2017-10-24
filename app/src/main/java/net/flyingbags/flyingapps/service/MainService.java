@@ -21,6 +21,7 @@ import net.flyingbags.flyingapps.presenter.MainPresenter;
 import net.flyingbags.flyingapps.view.ScheduleDeliveryActivity;
 
 import java.util.Vector;
+import java.util.regex.Pattern;
 
 public class MainService implements MainPresenter.presenter {
     private static final String TAG = MainService.class.getSimpleName();
@@ -88,17 +89,26 @@ public class MainService implements MainPresenter.presenter {
     // get invoice data
     @Override
     public void getInvoice(final String invoice){
-        FirebaseDatabase.getInstance().getReference().child("invoices").child(invoice)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        Invoice presentInfo = dataSnapshot.getValue(Invoice.class);
-                        view.onGetInvoiceSuccess(invoice, presentInfo);
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        view.onGetInvoiceFailed();
-                    }
-                });
+        if(!Pattern.matches("^[0-9]{10}",invoice)){
+            view.onGetInvoiceFailed();
+        }else{
+            FirebaseDatabase.getInstance().getReference().child("invoices").child(invoice)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Invoice presentInfo = dataSnapshot.getValue(Invoice.class);
+                            if (presentInfo != null) {
+                                view.onGetInvoiceSuccess(invoice, presentInfo);
+                            } else {
+                                view.onGetInvoiceFailed();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            view.onGetInvoiceFailed();
+                        }
+                    });
+        }
     }
 }
