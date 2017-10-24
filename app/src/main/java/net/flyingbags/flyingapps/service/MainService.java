@@ -113,7 +113,11 @@ public class MainService implements MainPresenter.presenter {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Invoice presentInfo = dataSnapshot.getValue(Invoice.class);
-                        view.onGetInvoiceSuccess(invoice, presentInfo);
+                        if(presentInfo != null) {
+                            view.onGetInvoiceSuccess(invoice, presentInfo);
+                        }else{
+                            view.onGetInvoiceFailed();
+                        }
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
