@@ -61,6 +61,7 @@ public class LoginService implements LoginPresenter.presenter {
         EditText editTextEmail = (EditText) activity.findViewById(R.id.edit_email);
         EditText editTextPasswd = (EditText) activity.findViewById(R.id.edit_passwd);
 
+        FirebaseAuth.getInstance().signOut();
 
         ///// 이 부분에서 인증 확인(변경해야함)
         if(editTextEmail.getText().toString().equals("a"))
