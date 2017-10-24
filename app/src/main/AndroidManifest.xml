@@ -35,6 +35,10 @@
         </activity>
         <activity android:name=".view.ScheduleDeliveryActivity">
         </activity>
+        <activity android:name=".view.OrderConfirmActivity">
+        </activity>
+        <activity android:name=".view.OrderCommitActivity">
+        </activity>
         <activity android:name=".view.ProfileActivity" />
 
     </application>

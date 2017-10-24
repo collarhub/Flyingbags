@@ -12,6 +12,7 @@ import android.widget.TabHost;
 import android.widget.Toast;
 
 import net.flyingbags.flyingapps.R;
+import net.flyingbags.flyingapps.model.Invoice;
 import net.flyingbags.flyingapps.presenter.ActionBarPresenter;
 import net.flyingbags.flyingapps.presenter.MainPresenter;
 import net.flyingbags.flyingapps.presenter.NavTabPresenter;
@@ -19,6 +20,8 @@ import net.flyingbags.flyingapps.service.ActionBarService;
 import net.flyingbags.flyingapps.service.MainService;
 import net.flyingbags.flyingapps.service.NavTabService;
 import net.flyingbags.flyingapps.service.Tab0Service;
+
+import java.util.Vector;
 
 /**
  * Created by User on 2017-10-07.
@@ -147,5 +150,45 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
         else {
             verifyQR(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    public void onGetInvoicesVectorFailed() {
+
+    }
+
+    @Override
+    public void onGetInvoicesVectorSuccess(Vector<String> invoices) {
+
+    }
+
+    @Override
+    public void onGetInvoiceSuccess(String invoice, Invoice presentInfo) {
+
+    }
+
+    @Override
+    public void onGetInvoiceFailed() {
+
+    }
+
+    @Override
+    public void onRegisterInvoiceOnNewOrderFailed() {
+
+    }
+
+    @Override
+    public void onRegisterInvoiceOnNewOrderSuccess() {
+
+    }
+
+    @Override
+    public void onRegisterInvoiceOnMyListFailed() {
+
+    }
+
+    @Override
+    public void onRegisterInvoiceOnMyListSuccess() {
+
     }
 }
