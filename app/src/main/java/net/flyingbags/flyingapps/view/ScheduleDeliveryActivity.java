@@ -24,6 +24,7 @@ import net.flyingbags.flyingapps.presenter.ScheduleDeliveryPresenter;
 import net.flyingbags.flyingapps.service.ActionBarService;
 import net.flyingbags.flyingapps.service.ScheduleDeliveryService;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -144,10 +145,21 @@ public class ScheduleDeliveryActivity extends AppCompatActivity implements Actio
 
         MaterialCalendarView materialCalendarView = (MaterialCalendarView)findViewById(R.id.calendarView);
         List<CalendarDay> selectedDates = materialCalendarView.getSelectedDates();
-        String minDateExpected = selectedDates.toString();
-        String maxDateExpected = selectedDates.get(selectedDates.size() - 1).getDate().toString();
-        String selected = materialCalendarView.getSelectedDate().getDate().toString();
-        Toast.makeText(this, selectedDates.toString(), Toast.LENGTH_SHORT).show();
+        CalendarDay minDate = selectedDates.get(0);
+        CalendarDay maxDate = selectedDates.get(0);
+        for(CalendarDay date : selectedDates) {
+            if(minDate.isAfter(date)) {
+                minDate = date;
+            }
+        }
+        for(CalendarDay date : selectedDates) {
+            if(maxDate.isBefore(date)) {
+                maxDate = date;
+            }
+        }
+        String minDateExpected = minDate.getDate().toString();
+        String maxDateExpected = maxDate.getDate().toString();
+        Toast.makeText(this, minDateExpected + "~" + maxDateExpected, Toast.LENGTH_SHORT).show();
 
         intent.putExtra("invoiceID", invoiceID);
         intent.putExtra("invoice", invoice);
