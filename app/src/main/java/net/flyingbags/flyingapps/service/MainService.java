@@ -33,8 +33,8 @@ public class MainService implements MainPresenter.presenter {
 
     // make new order by user
     @Override
-    public void registerInvoiceOnNewOrder(final String invoice, Invoice contents){
-        FirebaseDatabase.getInstance().getReference().child("newOrders").child(invoice).setValue((NewOrder)contents)
+    public void registerInvoiceOnInvoices(final String invoice, Invoice contents){
+        FirebaseDatabase.getInstance().getReference().child("invoices").child(invoice).setValue(contents)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -51,7 +51,7 @@ public class MainService implements MainPresenter.presenter {
     // order registered on user's list by user
     @Override
     public void registerInvoiceOnMyList(final String invoice){
-        FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(invoice).setValue("ready")
+        FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("invoices").child(invoice).setValue("ready")
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

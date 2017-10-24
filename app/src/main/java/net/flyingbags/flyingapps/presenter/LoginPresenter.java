@@ -22,5 +22,7 @@ public class LoginPresenter {
         void signIn();
         void createUser(String email, String password);
         void signIn(String email, String password);
+
+        void authAdmin();
     }
 }
