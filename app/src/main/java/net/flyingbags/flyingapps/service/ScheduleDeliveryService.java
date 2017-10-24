@@ -10,21 +10,9 @@ import net.flyingbags.flyingapps.presenter.ScheduleDeliveryPresenter;
  */
 
 public class ScheduleDeliveryService implements ScheduleDeliveryPresenter.presenter {
-    private AppCompatActivity activity;
+    private ScheduleDeliveryPresenter.view activity;
 
-    public ScheduleDeliveryService(AppCompatActivity activity) {
+    public ScheduleDeliveryService(ScheduleDeliveryPresenter.view activity) {
         this.activity = activity;
-    }
-
-    @Override
-    public void showHome() {
-        activity.setResult(ScheduleDeliveryPresenter.RESULT_HOME, null);
-        activity.finish();
-    }
-
-    @Override
-    public void showProfile() {
-        activity.setResult(ScheduleDeliveryPresenter.RESULT_PROFILE, null);
-        activity.finish();
     }
 }

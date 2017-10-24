@@ -11,6 +11,9 @@ import android.widget.ImageButton;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
 import net.flyingbags.flyingapps.R;
 import net.flyingbags.flyingapps.model.Invoice;
 import net.flyingbags.flyingapps.presenter.ActionBarPresenter;
@@ -70,26 +73,7 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
-                switch (tabId) {
-                    case "TAB0":
-                        setTitle("My Location");
-                        break;
-                    case "TAB1":
-                        setTitle("Notifications");
-                        break;
-                    case "TAB2":
-                        setTitle("My Delivery");
-                        break;
-                    case "TAB3":
-                        setTitle("My Order");
-                        break;
-                    case "TAB4":
-                        setTitle("Settings");
-                        break;
-                    case "TAB5":
-                        setTitle("My Profile");
-                        break;
-                }
+                MainActivity.this.onTabChanged(tabId);
             }
         });
         mainService = new MainService(this);
@@ -120,9 +104,32 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
         navTabService.showProfile();
     }
 
-    @Override
-    public void verifyQR(int requestCode, int resultCode, Intent data) {
-        Toast.makeText(this, mainService.verifyQR(requestCode, resultCode, data), Toast.LENGTH_SHORT).show();
+    private void onTabChanged(String tabId) {
+        switch (tabId) {
+            case "TAB0":
+                setTitle("My Location");
+                break;
+            case "TAB1":
+                setTitle("Notifications");
+                break;
+            case "TAB2":
+                setTitle("My Delivery");
+                break;
+            case "TAB3":
+                setTitle("My Order");
+                break;
+            case "TAB4":
+                setTitle("Settings");
+                break;
+            case "TAB5":
+                setTitle("My Profile");
+                break;
+        }
+    }
+
+    private void verifyQR(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        mainService.getInvoice(result.getContents());
     }
 
     @Override
@@ -163,13 +170,15 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
     }
 
     @Override
-    public void onGetInvoiceSuccess(String invoice, Invoice presentInfo) {
-
+    public void onGetInvoiceSuccess(String invoiceID, Invoice invoice) {
+        Intent intent = new Intent(this, ScheduleDeliveryActivity.class);
+        intent.putExtra("invoiceID", invoiceID);
+        intent.putExtra("invoice", invoice);
+        startActivityForResult(intent, ActionBarPresenter.REQUEST_CODE_TAB);
     }
 
     @Override
     public void onGetInvoiceFailed() {
-
     }
 
     @Override

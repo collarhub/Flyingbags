@@ -8,14 +8,8 @@ import android.content.Intent;
 
 public class Tab0Presenter {
     public interface view {
-        void showMap();
-        void menuToggle();
-        void scanQR();
     }
 
     public interface presenter {
-        void menuToggle();
-        void scanQR();
-        void showMap();
     }
 }

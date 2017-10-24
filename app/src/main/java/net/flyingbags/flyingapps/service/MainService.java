@@ -26,28 +26,8 @@ public class MainService implements MainPresenter.presenter {
     private static final String TAG = MainService.class.getSimpleName();
     private MainPresenter.view view;
 
-    private AppCompatActivity activity;
-
-    /*@Deprecated
-    public MainService(AppCompatActivity activity) {
-        this.activity = activity;
-        this.view = (MainPresenter.view) activity;
-    }*/
-
     public MainService(MainPresenter.view view) {
         this.view = view;
-        this.activity = (AppCompatActivity) view;
-    }
-
-    @Override
-    public String verifyQR(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result.getContents() == null)
-            return "Scan Failed";
-        else {
-            activity.startActivity(new Intent(activity, ScheduleDeliveryActivity.class));
-            return "Scan Success";
-        }
     }
 
     // make new order by user

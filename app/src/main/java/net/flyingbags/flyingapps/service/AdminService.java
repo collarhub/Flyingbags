@@ -29,7 +29,7 @@ public class AdminService implements AdminPresenter.presenter {
     // you can make "invoice code" by this method
     @Override
     public void generateInvoice(String invoice){
-        setInvoice(invoice, new Invoice("undistributed","",""));
+        setInvoice(invoice, new Invoice("","","","","","","","undistributed","",""));
     }
 
     // admin can get new orders that need to deliver.
@@ -61,14 +61,14 @@ public class AdminService implements AdminPresenter.presenter {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Invoice presentInfo = dataSnapshot.getValue(Invoice.class);
-                        if(contents.status == null){
-                            contents.status = presentInfo.status;
+                        if(contents.getStatus() == null){
+                            contents.setStatus(presentInfo.getStatus());
                         }
-                        if(contents.location == null){
-                            contents.location = presentInfo.location;
+                        if(contents.getLocation() == null){
+                            contents.setLocation(presentInfo.getLocation());
                         }
-                        if(contents.target == null){
-                            contents.target = presentInfo.target;
+                        if(contents.getTarget() == null){
+                            contents.setTarget(presentInfo.getTarget());
                         }
                         FirebaseDatabase.getInstance().getReference().child("invoices").child(invoice).setValue(contents)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {

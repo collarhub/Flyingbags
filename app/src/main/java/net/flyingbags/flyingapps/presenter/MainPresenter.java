@@ -15,12 +15,10 @@ public class MainPresenter {
     public static final int RESULT_HOME = 1002;
     public static final int RESULT_PROFILE = 1003;
     public interface view {
-        void verifyQR(int requestCode, int resultCode, Intent data);
-
         void onGetInvoicesVectorFailed();
         void onGetInvoicesVectorSuccess(Vector<String> invoices);
 
-        void onGetInvoiceSuccess(String invoice, Invoice presentInfo);
+        void onGetInvoiceSuccess(String invoiceID, Invoice invoice);
         void onGetInvoiceFailed();
 
         void onRegisterInvoiceOnNewOrderFailed();
@@ -31,7 +29,6 @@ public class MainPresenter {
     }
 
     public interface presenter {
-        String verifyQR(int requestCode, int resultCode, Intent data);
         void registerInvoiceOnNewOrder(final String invoice, String location, String target);
         void registerInvoiceOnMyList(final String invoice, String location, String target);
         void getInvoicesVector();
