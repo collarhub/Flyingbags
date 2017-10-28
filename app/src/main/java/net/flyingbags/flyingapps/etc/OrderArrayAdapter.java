@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import net.flyingbags.flyingapps.R;
 
@@ -38,6 +39,14 @@ public class OrderArrayAdapter extends ArrayAdapter {
             LayoutInflater layoutInflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.item_order, parent, false);
         }
+        OrderListItem orderListItem = arrayList.get(position);
+        ((TextView)convertView.findViewById(R.id.textView_order_id)).setText(orderListItem.getOrderId());
+        ((TextView)convertView.findViewById(R.id.textView_order_date)).setText(orderListItem.getOrderDate());
+        ((TextView)convertView.findViewById(R.id.textView_package_type)).setText(orderListItem.getPackageType().substring(0, 1).toUpperCase() + orderListItem.getPackageType().substring(1) + " Package");
+        ((TextView)convertView.findViewById(R.id.textView_price)).setText("KRW " + String.format("%,d", Integer.parseInt(orderListItem.getPrice())));
+        ((TextView)convertView.findViewById(R.id.textView_sub_total)).setText("KRW " + String.format("%,d", Integer.parseInt(orderListItem.getSubTotal())));
+        ((TextView)convertView.findViewById(R.id.textView_target)).setText(orderListItem.getTarget());
+        ((TextView)convertView.findViewById(R.id.textView_total_price)).setText("KRW " + String.format("%,d", Integer.parseInt(orderListItem.getTotalPrice())));
         return convertView;
     }
 

@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/login_transparent_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/transparent_view"
+        android:text="Button"
+        android:textColor="@android:color/transparent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edit_email"
@@ -15,6 +29,7 @@
         android:hint="Email Address"
         android:inputType="textPersonName"
         android:paddingLeft="50dp"
+        android:text="test001@flyingbags.net"
         android:textColor="@android:color/white"
         android:textColorHint="@drawable/hint_selector"
         android:textColorLink="@color/colorPrimary"
@@ -33,6 +48,7 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:paddingLeft="50dp"
+        android:text="fly001"
         android:textColor="@android:color/white"
         android:textColorHint="@drawable/hint_selector"
         android:textColorLink="@color/colorPrimary"

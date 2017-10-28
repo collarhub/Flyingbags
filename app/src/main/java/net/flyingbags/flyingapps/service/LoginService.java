@@ -35,54 +35,13 @@ import java.util.Vector;
 public class LoginService implements LoginPresenter.presenter {
     private static final String TAG = LoginService.class.getSimpleName();
 
-    private AppCompatActivity activity;
     private LoginPresenter.view view;
 
     private FirebaseAuth mAuth;
 
-    public LoginService(AppCompatActivity activity) {
-        this.activity = activity;
-        this.view = (LoginPresenter.view) activity;
-        mAuth = FirebaseAuth.getInstance();
-    }
-
     public LoginService(LoginPresenter.view view){
         this.view = view;
-        this.activity = (AppCompatActivity) view;
         mAuth = FirebaseAuth.getInstance();
-    }
-
-    // 배경 터치시 editText focus out시킴
-    @Override
-    public void focusOut() {
-        EditText editTextEmail = (EditText) activity.findViewById(R.id.edit_email);
-        EditText editTextPasswd = (EditText) activity.findViewById(R.id.edit_passwd);
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(editTextEmail.getWindowToken(), 0);
-        inputMethodManager.hideSoftInputFromWindow(editTextPasswd.getWindowToken(), 0);
-    }
-
-    // 로그인 체크 하는 부분
-    @Override
-    public void signIn() {
-        boolean signinChk = false;
-        EditText editTextEmail = (EditText) activity.findViewById(R.id.edit_email);
-        EditText editTextPasswd = (EditText) activity.findViewById(R.id.edit_passwd);
-
-        FirebaseAuth.getInstance().signOut();
-
-        ///// 이 부분에서 인증 확인(변경해야함)
-        if(editTextEmail.getText().toString().equals("a"))
-            signinChk = true;
-        /////
-
-        // 인증 되면 다음 activity
-        if(signinChk) {
-            activity.startActivity(new Intent(activity, MainActivity.class));
-            activity.finish();
-        } else {    // 인증 안되면 forget passwd 메시지 띄움
-            ((LinearLayout) activity.findViewById(R.id.login_linear_forget)).setVisibility(View.VISIBLE);
-        }
     }
 
     @Override

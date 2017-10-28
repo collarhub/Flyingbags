@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -74,7 +75,7 @@ public class MainService implements MainPresenter.presenter {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Vector<String> Invoices = new Vector<String>();
                         for(DataSnapshot newOrdersSnapShot : dataSnapshot.getChildren()){
-                            Invoices.add(newOrdersSnapShot.getValue(String.class));
+                            Invoices.add(newOrdersSnapShot.getKey());
                         }
                         view.onGetInvoicesVectorSuccess(Invoices);
                     }

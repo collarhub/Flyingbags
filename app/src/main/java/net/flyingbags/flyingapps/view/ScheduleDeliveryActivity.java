@@ -29,8 +29,6 @@ import net.flyingbags.flyingapps.service.ScheduleDeliveryService;
 
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
@@ -39,10 +37,9 @@ import java.util.Vector;
  * Created by User on 2017-10-10.
  */
 
-public class ScheduleDeliveryActivity extends AppCompatActivity implements ActionBarPresenter.view, ScheduleDeliveryPresenter.view, MainPresenter.view {
+public class ScheduleDeliveryActivity extends AppCompatActivity implements ActionBarPresenter.view, ScheduleDeliveryPresenter.view {
     private ActionBarService actionBarService;
     private ScheduleDeliveryService scheduleDeliveryService;
-    private MainService mainService;
     private View viewActionBar;
     private ImageButton imageButtonHome;
     private ImageButton imageButtonProfile;
@@ -64,7 +61,6 @@ public class ScheduleDeliveryActivity extends AppCompatActivity implements Actio
 
         actionBarService = new ActionBarService(this, "Schedule Delivery");
         scheduleDeliveryService = new ScheduleDeliveryService(this);
-        mainService = new MainService(this);
 
         showActionBar();
 
@@ -150,6 +146,10 @@ public class ScheduleDeliveryActivity extends AppCompatActivity implements Actio
 
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup_delivery_type);
         int checkedRadioButtonId = radioGroup.getCheckedRadioButtonId();
+        if(checkedRadioButtonId == -1) {
+            Toast.makeText(this, "choose \"Deliver type\".", Toast.LENGTH_SHORT).show();
+            return;
+        }
         RadioButton radioButton = (RadioButton) findViewById(checkedRadioButtonId);
         String deliveryType = radioButton.getText().toString();
 
@@ -157,9 +157,17 @@ public class ScheduleDeliveryActivity extends AppCompatActivity implements Actio
         EditText editTextFrom = (EditText) findViewById(R.id.editText_from_address);
         String target = editTextTo.getText().toString();
         String departure = editTextFrom.getText().toString();
+        if(target.equals("") || departure.equals("")) {
+            Toast.makeText(this, "fill out \"Destination\".", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         MaterialCalendarView materialCalendarView = (MaterialCalendarView)findViewById(R.id.calendarView);
         List<CalendarDay> selectedDates = materialCalendarView.getSelectedDates();
+        if(selectedDates.size() == 0) {
+            Toast.makeText(this, "choose \"Date for Delivery\".", Toast.LENGTH_SHORT).show();
+            return;
+        }
         CalendarDay minDate = selectedDates.get(0);
         CalendarDay maxDate = selectedDates.get(0);
         for(CalendarDay date : selectedDates) {
@@ -180,7 +188,10 @@ public class ScheduleDeliveryActivity extends AppCompatActivity implements Actio
         invoice.setMinDateExpected(minDateExpected);
         invoice.setMaxDateExpected(maxDateExpected);
 
-        mainService.registerInvoiceOnNewOrder(invoiceID, invoice);
+        Intent intent = new Intent(this, OrderConfirmActivity.class);
+        intent.putExtra("invoiceID", invoiceID);
+        intent.putExtra("invoice", invoice);
+        startActivityForResult(intent, ActionBarPresenter.REQUEST_CODE_TAB);
     }
 
     private void setPackageType() {
@@ -196,48 +207,5 @@ public class ScheduleDeliveryActivity extends AppCompatActivity implements Actio
                 break;
         }
         textViewPackageType.setText("1");
-    }
-
-    @Override
-    public void onGetInvoicesVectorFailed() {
-
-    }
-
-    @Override
-    public void onGetInvoicesVectorSuccess(Vector<String> invoices) {
-
-    }
-
-    @Override
-    public void onGetInvoiceSuccess(String invoiceID, Invoice invoice) {
-
-    }
-
-    @Override
-    public void onGetInvoiceFailed() {
-
-    }
-
-    @Override
-    public void onRegisterInvoiceOnNewOrderFailed() {
-        Toast.makeText(this, "neworderfail", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onRegisterInvoiceOnNewOrderSuccess() {
-        mainService.registerInvoiceOnMyList(invoiceID);
-    }
-
-    @Override
-    public void onRegisterInvoiceOnMyListFailed() {
-        Toast.makeText(this, "mylistfail", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onRegisterInvoiceOnMyListSuccess() {
-        Intent intent = new Intent(this, OrderConfirmActivity.class);
-        intent.putExtra("invoiceID", invoiceID);
-        intent.putExtra("invoice", invoice);
-        startActivityForResult(intent, ActionBarPresenter.REQUEST_CODE_TAB);
     }
 }

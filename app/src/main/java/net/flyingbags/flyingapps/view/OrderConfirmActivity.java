@@ -13,17 +13,20 @@ import android.widget.Toast;
 import net.flyingbags.flyingapps.R;
 import net.flyingbags.flyingapps.etc.OrderArrayAdapter;
 import net.flyingbags.flyingapps.etc.OrderListItem;
+import net.flyingbags.flyingapps.model.Invoice;
 import net.flyingbags.flyingapps.presenter.ActionBarPresenter;
 import net.flyingbags.flyingapps.presenter.MainPresenter;
 import net.flyingbags.flyingapps.service.ActionBarService;
+import net.flyingbags.flyingapps.service.MainService;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * Created by User on 2017-10-18.
  */
 
-public class OrderConfirmActivity extends AppCompatActivity implements ActionBarPresenter.view {
+public class OrderConfirmActivity extends AppCompatActivity implements ActionBarPresenter.view, MainPresenter.view {
     private ActionBarService actionBarService;
     private View viewActionBar;
     private ImageButton imageButtonHome;
@@ -32,12 +35,19 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
     private OrderArrayAdapter orderArrayAdapter;
     private ArrayList<OrderListItem> arrayList;
     private Button buttonToCommit;
+    private String invoiceID;
+    private Invoice invoice;
+    private MainService mainService;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_confirm);
 
+        invoiceID = getIntent().getStringExtra("invoiceID");
+        invoice = (Invoice) getIntent().getSerializableExtra("invoice");
+
         actionBarService = new ActionBarService(this, "My Order");
+        mainService = new MainService(this);
 
         showActionBar();
 
@@ -61,7 +71,11 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
         });
 
         arrayList = new ArrayList<>();
-        arrayList.add(new OrderListItem());
+        arrayList.add(new OrderListItem(invoiceID, invoice.getOrderDate(),
+                invoice.getPackageType().substring(0, 1).toUpperCase() + invoice.getPackageType().substring(1) + " Package",
+                "KRW " + String.format("%,d", Integer.parseInt(invoice.getPrice())),
+                "KRW " + String.format("%,d", Integer.parseInt(invoice.getPrice())), invoice.getTarget(),
+                "KRW " + String.format("%,d", Integer.parseInt(invoice.getPrice()))));
 
         orderArrayAdapter = new OrderArrayAdapter(this, R.layout.item_order, arrayList);
 
@@ -75,7 +89,8 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
         buttonToCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(OrderConfirmActivity.this, OrderCommitActivity.class), ActionBarPresenter.REQUEST_CODE_TAB);
+                invoice.setStatus("ready");
+                mainService.registerInvoiceOnInvoices(invoiceID, invoice);
             }
         });
     }
@@ -102,5 +117,45 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
                 finish();
             }
         }
+    }
+
+    @Override
+    public void onGetInvoicesVectorFailed() {
+
+    }
+
+    @Override
+    public void onGetInvoicesVectorSuccess(Vector<String> invoices) {
+
+    }
+
+    @Override
+    public void onGetInvoiceSuccess(String invoiceID, Invoice invoice) {
+
+    }
+
+    @Override
+    public void onGetInvoiceFailed() {
+
+    }
+
+    @Override
+    public void onRegisterInvoiceOnNewOrderFailed() {
+
+    }
+
+    @Override
+    public void onRegisterInvoiceOnNewOrderSuccess() {
+        mainService.registerInvoiceOnMyList(invoiceID);
+    }
+
+    @Override
+    public void onRegisterInvoiceOnMyListFailed() {
+
+    }
+
+    @Override
+    public void onRegisterInvoiceOnMyListSuccess() {
+        startActivityForResult(new Intent(this, OrderCommitActivity.class), ActionBarPresenter.REQUEST_CODE_TAB);
     }
 }

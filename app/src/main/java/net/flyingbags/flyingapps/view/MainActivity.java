@@ -129,7 +129,13 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
 
     private void verifyQR(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        mainService.getInvoice(result.getContents());
+        if(result.getContents() == null) {
+            onGetInvoiceFailed();
+        }
+        else {
+            mainService.getInvoice(result.getContents());
+        }
+        //mainService.getInvoice("9999000004");
     }
 
     @Override

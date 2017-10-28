@@ -9,8 +9,6 @@ import android.app.Activity;
 
 public class LoginPresenter {
     public interface view {
-        void focusOut();
-        void signIn();
         void onSignInFailed();
         void onSignInSuccess();
         void onCreateUserFailed();
@@ -18,8 +16,6 @@ public class LoginPresenter {
     }
 
     public interface presenter {
-        void focusOut();
-        void signIn();
         void createUser(String email, String password);
         void signIn(String email, String password);
 

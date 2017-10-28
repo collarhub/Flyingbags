@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import net.flyingbags.flyingapps.R;
 
@@ -47,6 +50,29 @@ public class StateArrayAdapter extends ArrayAdapter {
         if(convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.item_status, parent, false);
+        }
+        StateListItem stateListItem = arrayList.get(position);
+        ((TextView)convertView.findViewById(R.id.textView_state_order_number)).setText(stateListItem.getOrderId());
+        LinearLayout linearLayoutReadyHeader = (LinearLayout) convertView.findViewById(R.id.linearLayout_state_ready_header);
+        LinearLayout linearLayoutReadyBody = (LinearLayout) convertView.findViewById(R.id.linearLayout_state_ready_body);
+        LinearLayout linearLayoutConfirmedHeader = (LinearLayout) convertView.findViewById(R.id.linearLayout_state_confirmed_header);
+        LinearLayout linearLayoutConfirmedBody = (LinearLayout) convertView.findViewById(R.id.linearLayout_state_confirmed_body);
+        LinearLayout linearLayoutDeliveringHeader = (LinearLayout) convertView.findViewById(R.id.linearLayout_state_delivering_header);
+        LinearLayout linearLayoutDeliveringBody = (LinearLayout) convertView.findViewById(R.id.linearLayout_state_delivering_body);
+        LinearLayout linearLayoutArrivedHeader = (LinearLayout) convertView.findViewById(R.id.linearLayout_state_arrived_header);
+        LinearLayout linearLayoutArrivedBody = (LinearLayout) convertView.findViewById(R.id.linearLayout_state_arrived_body);
+        String status = stateListItem.getStatus();
+        switch (status) {
+            case "ready":
+                linearLayoutConfirmedHeader.setVisibility(View.GONE);
+                linearLayoutConfirmedBody.setVisibility(View.GONE);
+                linearLayoutDeliveringHeader.setVisibility(View.GONE);
+                linearLayoutDeliveringBody.setVisibility(View.GONE);
+                linearLayoutArrivedHeader.setVisibility(View.GONE);
+                linearLayoutArrivedBody.setVisibility(View.GONE);
+                ((ImageView)convertView.findViewById(R.id.imageView_state_ready_body_stick)).setVisibility(View.INVISIBLE);
+                ((ImageView)convertView.findViewById(R.id.imageView_state_ready_header_bottom)).setVisibility(View.INVISIBLE);
+                break;
         }
         return convertView;
     }
