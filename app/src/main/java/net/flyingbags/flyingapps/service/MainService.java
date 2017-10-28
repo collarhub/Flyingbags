@@ -35,6 +35,7 @@ public class MainService implements MainPresenter.presenter {
     // make new order by user
     @Override
     public void registerInvoiceOnInvoices(final String invoice, Invoice contents){
+        contents.setStatus("ready");
         FirebaseDatabase.getInstance().getReference().child("invoices").child(invoice).setValue(contents)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
