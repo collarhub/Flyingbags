@@ -73,11 +73,11 @@ public class MainService implements MainPresenter.presenter {
     @Override
     public void registerInvoice(final String invoice, Invoice contents, Route route){
         contents.setStatus("ready");
+        contents.addRoute(route);
         Map<String, Object> childUpdates = new HashMap<>();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         childUpdates.put("/invoices/"+invoice,contents);
-        childUpdates.put("/invoices/"+invoice+"/route/"+route.getDate(), route);
         childUpdates.put("/users/"+uid+"/invoices/"+invoice,"ready");
 
         FirebaseDatabase.getInstance().getReference().updateChildren(childUpdates)
