@@ -13,6 +13,8 @@ public class LoginPresenter {
         void onSignInSuccess();
         void onCreateUserFailed();
         void onCreateUserSuccess();
+
+        void onAuthAdminSuccess();
     }
 
     public interface presenter {

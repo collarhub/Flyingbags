@@ -39,7 +39,12 @@
         </activity>
         <activity android:name=".view.OrderCommitActivity">
         </activity>
-        <activity android:name=".view.ProfileActivity" />
+        <activity android:name=".view.AdminInvoiceDetailActivity">
+        </activity>
+        <activity android:name=".view.AdminInvoiceListActivity">
+        </activity>
+        <activity android:name=".view.AdminInvoiceRouteActivity">
+        </activity>
 
     </application>
 

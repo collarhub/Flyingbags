@@ -9,17 +9,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/spinner_category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
         <Button
-            android:id="@+id/button_qrscan"
+            android:id="@+id/button_route"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="QRscan" />
+            android:text="Route" />
 
     </LinearLayout>
 

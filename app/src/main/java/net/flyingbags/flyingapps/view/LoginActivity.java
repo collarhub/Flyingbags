@@ -108,6 +108,12 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
 
     }
 
+    @Override
+    public void onAuthAdminSuccess() {
+        this.startActivity(new Intent(this, AdminInvoiceListActivity.class));
+        this.finish();
+    }
+
     private void editTextfocusout() {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(editTextEmail.getWindowToken(), 0);

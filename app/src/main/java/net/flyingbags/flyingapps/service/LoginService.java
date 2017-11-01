@@ -72,7 +72,8 @@ public class LoginService implements LoginPresenter.presenter {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
                             view.onSignInFailed(); // login failed
                         }else {
-                            view.onSignInSuccess(); // login success
+                            authAdmin();
+                            //view.onSignInSuccess(); // login success
                         }
                     }
                 });
@@ -86,15 +87,14 @@ public class LoginService implements LoginPresenter.presenter {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Admin mAdmin = dataSnapshot.getValue(Admin.class);
                         if (mAdmin != null) {
-                            //view.onAuthAdminSuccess();
+                            view.onAuthAdminSuccess();
                         } else {
-                            //view.onGetInvoiceFailed();
+                            view.onSignInSuccess();
                         }
                     }
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        //view.onGetNewOrdersFailed();
+                        view.onSignInSuccess();
                     }
                 });
     }

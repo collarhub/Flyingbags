@@ -11,7 +11,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import net.flyingbags.flyingapps.model.Invoice;
-import net.flyingbags.flyingapps.model.NewOrder;
 import net.flyingbags.flyingapps.presenter.AdminPresenter;
 
 import java.util.Vector;
@@ -30,61 +29,35 @@ public class AdminService implements AdminPresenter.presenter {
         setInvoice(invoice, new Invoice("","","","","","","","","undistributed","",null));
     }
 
-    // admin can get new orders that need to deliver.
+    // all orders must be refreshed by admin with this method.
     @Override
-    public void getNewOrders(){
-        FirebaseDatabase.getInstance().getReference().child("newOrders").orderByChild("status").equalTo("ready")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+    public void setInvoice(final String invoice, final Invoice contents){
+        FirebaseDatabase.getInstance().getReference().child("invoices").child(invoice).setValue(contents)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        Vector<NewOrder> NewOrders = new Vector<NewOrder>();
-                        for(DataSnapshot newOrdersSnapShot : dataSnapshot.getChildren()){
-                            NewOrders.add(newOrdersSnapShot.getValue(NewOrder.class));
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d(TAG, "setInvoice:onComplete:" + task.isSuccessful());
+                        if (!task.isSuccessful()) {
+                            view.onSetInvoiceFailed(); // create invoice failed
+                        }else{
+                            view.onSetInvoiceSuccess(); // create invoice success
                         }
-                        view.onGetNewOrdersSuccess(NewOrders);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        view.onGetNewOrdersFailed();
                     }
                 });
     }
 
-    // all orders must be refreshed by admin with this method.
     @Override
-    public void setInvoice(final String invoice, final Invoice contents){
-        FirebaseDatabase.getInstance().getReference().child("invoices").child(invoice)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+    public void setInvoice(final String invoice, final String field, final Object content){
+        FirebaseDatabase.getInstance().getReference().child("invoices").child(invoice).child(field).setValue(content)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        Invoice presentInfo = dataSnapshot.getValue(Invoice.class);
-                        if(contents.getStatus() == null){
-                            contents.setStatus(presentInfo.getStatus());
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d(TAG, "setInvoice:onComplete:" + task.isSuccessful());
+                        if (!task.isSuccessful()) {
+                            view.onSetInvoiceFailed(); // create invoice failed
+                        }else{
+                            view.onSetInvoiceSuccess(); // create invoice success
                         }
-                        if(contents.getLocation() == null){
-                            contents.setLocation(presentInfo.getLocation());
-                        }
-                        if(contents.getTarget() == null){
-                            contents.setTarget(presentInfo.getTarget());
-                        }
-                        FirebaseDatabase.getInstance().getReference().child("invoices").child(invoice).setValue(contents)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        Log.d(TAG, "setInvoice:onComplete:" + task.isSuccessful());
-                                        if (!task.isSuccessful()) {
-                                            view.onSetInvoiceFailed(); // create invoice failed
-                                        }else{
-                                            view.onSetInvoiceSuccess(); // create invoice success
-                                        }
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        view.onSetInvoiceFailed(); // create invoice failed
                     }
                 });
     }
@@ -99,7 +72,27 @@ public class AdminService implements AdminPresenter.presenter {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Vector<String> Invoices = new Vector<String>();
                         for(DataSnapshot newOrdersSnapShot : dataSnapshot.getChildren()){
-                            Invoices.add(newOrdersSnapShot.getValue(String.class));
+                            Invoices.add(newOrdersSnapShot.getKey());
+                        }
+                        view.onGetInvoicesVectorSuccess(Invoices);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        view.onGetInvoicesVectorFailed();
+                    }
+                });
+    }
+
+    @Override
+    public void getInvoicesVector(String status){
+        FirebaseDatabase.getInstance().getReference().child("invoices").orderByChild("status").equalTo(status)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Vector<String> Invoices = new Vector<String>();
+                        for(DataSnapshot newOrdersSnapShot : dataSnapshot.getChildren()){
+                            Invoices.add(newOrdersSnapShot.getKey());
                         }
                         view.onGetInvoicesVectorSuccess(Invoices);
                     }
@@ -127,6 +120,4 @@ public class AdminService implements AdminPresenter.presenter {
                     }
                 });
     }
-
-
 }

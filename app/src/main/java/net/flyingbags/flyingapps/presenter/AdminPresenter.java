@@ -7,15 +7,9 @@ import net.flyingbags.flyingapps.model.NewOrder;
 
 import java.util.Vector;
 
-/**
- * Created by User on 2017-10-10.
- */
 
 public class AdminPresenter {
     public interface view {
-
-        void onGetNewOrdersSuccess(Vector<NewOrder> newOrders);
-        void onGetNewOrdersFailed();
 
         void onSetInvoiceFailed();
         void onSetInvoiceSuccess();
@@ -28,10 +22,15 @@ public class AdminPresenter {
     }
 
     public interface presenter {
+
+        void setInvoice(String invoice, String field, Object content);
+
         void getInvoicesVector();
         void generateInvoice(String invoice);
-        public void getNewOrders();
         void setInvoice(final String invoice, final Invoice contents);
+
+        void getInvoicesVector(String status);
+
         void getInvoice(final String invoice);
     }
 }
