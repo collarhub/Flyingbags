@@ -11,7 +11,7 @@ public class LoginPresenter {
     public interface view {
         void onSignInFailed();
         void onSignInSuccess();
-        void onCreateUserFailed();
+        void onCreateUserFailed(String errorMessage);
         void onCreateUserSuccess();
     }
 

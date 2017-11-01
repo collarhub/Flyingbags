@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
     }
 
     @Override
-    public void onCreateUserFailed() {
+    public void onCreateUserFailed(String errorMessage) {
 
     }
 
