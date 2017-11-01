@@ -1,6 +1,7 @@
 package net.flyingbags.flyingapps.model;
 
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.ServerValue;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -36,7 +37,7 @@ public class Invoice implements Serializable {
         this.price = price;
         this.status = status;
         this.location = location;
-        //this.route = new HashMap<>();
+        this.route = new HashMap<>();
     }
 
     public String getOrderDate() {
@@ -126,4 +127,6 @@ public class Invoice implements Serializable {
     public void setRoute(Map<String, Route> route) {
         this.route = route;
     }
+
+    public void addRoute(Route route){this.route.put(ServerValue.TIMESTAMP.toString(),route);}
 }
