@@ -127,5 +127,5 @@ public class Invoice implements Serializable {
         this.route = route;
     }
 
-    public void addRoute(Route route){this.route.put("jkjkjk",route);}
+    public void addRoute(Route route){this.route.put(Integer.toString(this.route.size()),route);}
 }
