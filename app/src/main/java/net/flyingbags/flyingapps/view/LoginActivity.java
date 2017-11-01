@@ -129,6 +129,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
     @Override
     public void onAuthAdminSuccess() {
         this.startActivity(new Intent(this, AdminInvoiceListActivity.class));
+        progressDialog.dismiss();
         this.finish();
     }
 

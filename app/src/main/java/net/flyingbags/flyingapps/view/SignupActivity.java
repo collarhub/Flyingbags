@@ -127,4 +127,9 @@ public class SignupActivity extends AppCompatActivity implements LoginPresenter.
         progressDialog.dismiss();
         finish();
     }
+
+    @Override
+    public void onAuthAdminSuccess() {
+
+    }
 }
