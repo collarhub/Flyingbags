@@ -21,17 +21,14 @@ import net.flyingbags.flyingapps.R;
 import net.flyingbags.flyingapps.etc.OneDayDecorator;
 import net.flyingbags.flyingapps.model.Invoice;
 import net.flyingbags.flyingapps.presenter.ActionBarPresenter;
-import net.flyingbags.flyingapps.presenter.MainPresenter;
 import net.flyingbags.flyingapps.presenter.ScheduleDeliveryPresenter;
 import net.flyingbags.flyingapps.service.ActionBarService;
-import net.flyingbags.flyingapps.service.MainService;
 import net.flyingbags.flyingapps.service.ScheduleDeliveryService;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.Vector;
 
 /**
  * Created by User on 2017-10-10.
@@ -187,6 +184,7 @@ public class ScheduleDeliveryActivity extends AppCompatActivity implements Actio
         invoice.setDeparture(departure);
         invoice.setMinDateExpected(minDateExpected);
         invoice.setMaxDateExpected(maxDateExpected);
+        invoice.setRoute(null);
 
         Intent intent = new Intent(this, OrderConfirmActivity.class);
         intent.putExtra("invoiceID", invoiceID);

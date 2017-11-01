@@ -1,16 +1,22 @@
 package net.flyingbags.flyingapps.etc;
 
+import net.flyingbags.flyingapps.model.Route;
+
+import java.util.Map;
+
 /**
  * Created by User on 2017-10-23.
  */
 
 public class StateListItem {
     private String orderId;
-    private String status;
+    private String orderDate;
+    private Map<String, Route> route;
 
-    public StateListItem(String orderId, String status) {
+    public StateListItem(String orderId, String orderDate, Map<String,Route> route) {
         this.orderId = orderId;
-        this.status = status;
+        this.orderDate = orderDate;
+        this.route = route;
     }
 
     public String getOrderId() {
@@ -21,11 +27,19 @@ public class StateListItem {
         this.orderId = orderId;
     }
 
-    public String getStatus() {
-        return status;
+    public String getOrderDate() {
+        return orderDate;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public Map<String, Route> getRoute() {
+        return route;
+    }
+
+    public void setRoute(Map<String, Route> route) {
+        this.route = route;
     }
 }

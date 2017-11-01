@@ -5,21 +5,27 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -38,6 +44,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
     private ImageButton imageButtonMenu;
     private ImageButton imageButtonScan;
     private View view;
+    private ProgressDialog progressDialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,6 +52,9 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
 
         tab0Service = new Tab0Service(this);
         showMap();
+        progressDialog = new ProgressDialog(getActivity(), R.style.AppCompatAlertDialogStyle);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.progressbar_spin);
 
         imageButtonMenu = (ImageButton) view.findViewById(R.id.imageButton_menu);
         imageButtonMenu.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +70,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                 scanQR();
             }
         });
+
         return view;
     }
 
@@ -160,6 +171,12 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.560933, 126.986293)));
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(37.560933, 126.986293), 15);
                 googleMap.animateCamera(cameraUpdate);
+                googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                    @Override
+                    public void onMapLoaded() {
+                        progressDialog.dismiss();
+                    }
+                });
             }
         });
     }

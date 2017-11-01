@@ -1,10 +1,14 @@
 package net.flyingbags.flyingapps.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -30,6 +34,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
     private EditText editTextPasswd;            // passwd 입력 editText(완료 누르면 sign in 버튼 누른효과)
     private Button buttonSignIn;
     private Button transparentView;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +67,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
                     }
                     else {
                         loginService.signIn(editTextEmail.getText().toString(), editTextPasswd.getText().toString());
+                        runProgress();
                         transparentView.setVisibility(View.VISIBLE);
                     }
                     return true;
@@ -80,6 +86,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
                 }
                 else {
                     loginService.signIn(editTextEmail.getText().toString(), editTextPasswd.getText().toString());
+                    runProgress();
                     transparentView.setVisibility(View.VISIBLE);
                 }
             }
@@ -90,11 +97,13 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
     public void onSignInFailed() {
         ((LinearLayout) findViewById(R.id.login_linear_forget)).setVisibility(View.VISIBLE);
         transparentView.setVisibility(View.INVISIBLE);
+        progressDialog.dismiss();
     }
 
     @Override
     public void onSignInSuccess() {
         this.startActivity(new Intent(this, MainActivity.class));
+        progressDialog.dismiss();
         this.finish();
     }
 
@@ -114,5 +123,33 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
         inputMethodManager.hideSoftInputFromWindow(editTextPasswd.getWindowToken(), 0);
         editTextEmail.clearFocus();
         editTextPasswd.clearFocus();
+    }
+
+    private void runProgress() {
+        progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.progressbar_spin);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (progressDialog.isShowing()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                    builder.setMessage("Please check your network environment.")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    try {
+                                        progressDialog.dismiss();
+                                    } catch (Exception e) {
+                                    }
+                                }
+                            })
+                            .setCancelable(false)
+                            .create()
+                            .show();
+                }
+            }
+        }, 10000);
     }
 }
