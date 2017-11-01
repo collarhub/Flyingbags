@@ -79,9 +79,9 @@ public class MainService implements MainPresenter.presenter {
             tempRoute = new HashMap<>();
         }
         int routeListSize = tempRoute.size();
-        tempRoute.put(Integer.toString(routeListSize), route);
+        tempRoute.put("No"+Integer.toString(routeListSize), route);
         contents.setRoute(tempRoute);
-        
+
         Map<String, Object> childUpdates = new HashMap<>();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
