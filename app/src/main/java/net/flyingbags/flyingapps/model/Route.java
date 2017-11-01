@@ -1,6 +1,8 @@
 package net.flyingbags.flyingapps.model;
 
-public class Route {
+import java.io.Serializable;
+
+public class Route implements Serializable{
     private String status;
     private String date;
 

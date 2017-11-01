@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import net.flyingbags.flyingapps.presenter.LoadingPresenter;
 import net.flyingbags.flyingapps.service.LoadingService;
@@ -30,7 +31,6 @@ public class LoadingActivity extends AppCompatActivity implements LoadingPresent
         // mvp로 안해도 되는데 그냥 통일성 있게 해봤음
         loadingService = new LoadingService(this);
         permissionCheck();
-        loading();
     }
 
     @Override
@@ -45,16 +45,14 @@ public class LoadingActivity extends AppCompatActivity implements LoadingPresent
         }*/
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-
                 // Show an expanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSIONS_REQUEST_CAMERA);
 
             } else {
-
                 // No explanation needed, we can request the permission.
 
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSIONS_REQUEST_CAMERA);
@@ -63,6 +61,9 @@ public class LoadingActivity extends AppCompatActivity implements LoadingPresent
                 // app-defined int constant. The callback method gets the
                 // result of the request.
             }
+        }
+        else {
+            loading();
         }
     }
 
@@ -75,9 +76,10 @@ public class LoadingActivity extends AppCompatActivity implements LoadingPresent
 
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
+                    loading();
 
                 } else {
-
+                    finish();
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
@@ -87,5 +89,6 @@ public class LoadingActivity extends AppCompatActivity implements LoadingPresent
             // other 'case' lines to check for other
             // permissions this app might request
         }
+        loading();
     }
 }
