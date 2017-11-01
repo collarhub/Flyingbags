@@ -20,7 +20,7 @@ public class Invoice implements Serializable {
     private String status;
     private String location;
 
-    private Map<String, Route> route;
+    private Map<String, Route> route = new HashMap<>();
 
     public Invoice() {
         // Default constructor required for calls to DataSnapshot.getValue(newOrders.class)
@@ -37,7 +37,6 @@ public class Invoice implements Serializable {
         this.price = price;
         this.status = status;
         this.location = location;
-        this.route = new HashMap<>();
     }
 
     public String getOrderDate() {
