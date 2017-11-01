@@ -14,6 +14,7 @@ import net.flyingbags.flyingapps.R;
 import net.flyingbags.flyingapps.etc.OrderArrayAdapter;
 import net.flyingbags.flyingapps.etc.OrderListItem;
 import net.flyingbags.flyingapps.model.Invoice;
+import net.flyingbags.flyingapps.model.Route;
 import net.flyingbags.flyingapps.presenter.ActionBarPresenter;
 import net.flyingbags.flyingapps.presenter.MainPresenter;
 import net.flyingbags.flyingapps.service.ActionBarService;
@@ -72,10 +73,10 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
 
         arrayList = new ArrayList<>();
         arrayList.add(new OrderListItem(invoiceID, invoice.getOrderDate(),
-                invoice.getPackageType().substring(0, 1).toUpperCase() + invoice.getPackageType().substring(1) + " Package",
-                "KRW " + String.format("%,d", Integer.parseInt(invoice.getPrice())),
-                "KRW " + String.format("%,d", Integer.parseInt(invoice.getPrice())), invoice.getTarget(),
-                "KRW " + String.format("%,d", Integer.parseInt(invoice.getPrice()))));
+                invoice.getPackageType(),
+                invoice.getPrice(),
+                invoice.getPrice(), invoice.getTarget(),
+                invoice.getPrice()));
 
         orderArrayAdapter = new OrderArrayAdapter(this, R.layout.item_order, arrayList);
 
@@ -90,7 +91,8 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
             @Override
             public void onClick(View v) {
                 invoice.setStatus("ready");
-                mainService.registerInvoiceOnInvoices(invoiceID, invoice);
+                //mainService.registerInvoiceOnInvoices(invoiceID, invoice);
+                mainService.registerInvoice(invoiceID, invoice, new Route(invoice.getStatus(), invoice.getOrderDate()));
             }
         });
     }
@@ -157,5 +159,15 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
     @Override
     public void onRegisterInvoiceOnMyListSuccess() {
         startActivityForResult(new Intent(this, OrderCommitActivity.class), ActionBarPresenter.REQUEST_CODE_TAB);
+    }
+
+    @Override
+    public void onRegisterInvoiceSuccess() {
+        startActivityForResult(new Intent(this, OrderCommitActivity.class), ActionBarPresenter.REQUEST_CODE_TAB);
+    }
+
+    @Override
+    public void onRegisterInvoiceFailed() {
+
     }
 }

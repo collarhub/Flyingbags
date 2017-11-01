@@ -2,6 +2,7 @@ package net.flyingbags.flyingapps.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import net.flyingbags.flyingapps.presenter.LoadingPresenter;
@@ -23,6 +24,7 @@ public class LoadingActivity extends AppCompatActivity implements LoadingPresent
         // presenter를 통해서 2초 loading
         // mvp로 안해도 되는데 그냥 통일성 있게 해봤음
         loadingService = new LoadingService(this);
+        //int permissionCheck = ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.WRITE_CALENDAR);
         loading();
     }
 

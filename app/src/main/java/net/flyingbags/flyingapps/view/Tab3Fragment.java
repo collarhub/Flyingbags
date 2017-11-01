@@ -92,4 +92,14 @@ public class Tab3Fragment extends Fragment implements MainPresenter.view {
     public void onRegisterInvoiceOnMyListSuccess() {
 
     }
+
+    @Override
+    public void onRegisterInvoiceSuccess() {
+
+    }
+
+    @Override
+    public void onRegisterInvoiceFailed() {
+
+    }
 }

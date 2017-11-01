@@ -206,4 +206,14 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
     public void onRegisterInvoiceOnMyListSuccess() {
 
     }
+
+    @Override
+    public void onRegisterInvoiceSuccess() {
+
+    }
+
+    @Override
+    public void onRegisterInvoiceFailed() {
+
+    }
 }
