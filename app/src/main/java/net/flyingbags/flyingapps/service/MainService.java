@@ -73,7 +73,15 @@ public class MainService implements MainPresenter.presenter {
     @Override
     public void registerInvoice(final String invoice, Invoice contents, Route route){
         contents.setStatus("ready");
-        contents.addRoute(route);
+
+        Map<String, Route> tempRoute = contents.getRoute();
+        if(tempRoute == null){
+            tempRoute = new HashMap<>();
+        }
+        int routeListSize = tempRoute.size();
+        tempRoute.put(Integer.toString(routeListSize), route);
+        contents.setRoute(tempRoute);
+        
         Map<String, Object> childUpdates = new HashMap<>();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

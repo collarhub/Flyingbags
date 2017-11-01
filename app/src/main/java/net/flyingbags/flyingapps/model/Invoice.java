@@ -20,13 +20,13 @@ public class Invoice implements Serializable {
     private String status;
     private String location;
 
-    private Map<String, Route> route = new HashMap<>();
+    private Map<String, Route> route;
 
     public Invoice() {
         // Default constructor required for calls to DataSnapshot.getValue(newOrders.class)
     }
 
-    public Invoice(String orderDate, String deliveryType, String target, String departure, String minDateExpected, String maxDateExpected, String packageType, String price, String status, String location) {
+    public Invoice(String orderDate, String deliveryType, String target, String departure, String minDateExpected, String maxDateExpected, String packageType, String price, String status, String location, Map<String, Route> route) {
         this.orderDate = orderDate;
         this.deliveryType = deliveryType;
         this.target = target;
@@ -37,6 +37,7 @@ public class Invoice implements Serializable {
         this.price = price;
         this.status = status;
         this.location = location;
+        this.route = route;
     }
 
     public String getOrderDate() {
@@ -126,6 +127,4 @@ public class Invoice implements Serializable {
     public void setRoute(Map<String, Route> route) {
         this.route = route;
     }
-
-    public void addRoute(Route route){this.route.put(Integer.toString(this.route.size()),route);}
 }
