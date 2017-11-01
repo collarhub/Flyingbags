@@ -4,7 +4,6 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.ServerValue;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 
 @IgnoreExtraProperties
