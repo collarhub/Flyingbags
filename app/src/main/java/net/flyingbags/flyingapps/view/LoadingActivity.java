@@ -39,10 +39,10 @@ public class LoadingActivity extends AppCompatActivity implements LoadingPresent
     }
 
     private void permissionCheck() {
-        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        /*int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if(permissionCheck == PackageManager.PERMISSION_DENIED) {
 
-        }
+        }*/
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
