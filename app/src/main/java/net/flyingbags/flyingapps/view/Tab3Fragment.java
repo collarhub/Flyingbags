@@ -1,8 +1,12 @@
 package net.flyingbags.flyingapps.view;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +35,7 @@ public class Tab3Fragment extends Fragment implements MainPresenter.view {
     private OrderArrayAdapter orderArrayAdapter;
     private ArrayList<OrderListItem> arrayList;
     private MainService mainService;
+    private ProgressDialog progressDialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,6 +45,32 @@ public class Tab3Fragment extends Fragment implements MainPresenter.view {
 
         arrayList = new ArrayList<>();
         mainService.getInvoicesVector();
+        progressDialog = new ProgressDialog(getActivity(), R.style.AppCompatAlertDialogStyle);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.progressbar_spin);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (progressDialog.isShowing()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setMessage("Please check your network environment.")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    try {
+                                        progressDialog.dismiss();
+                                    } catch (Exception e) {
+                                    }
+                                }
+                            })
+                            .setCancelable(false)
+                            .create()
+                            .show();
+                }
+            }
+        }, 10000);
 
         orderArrayAdapter = new OrderArrayAdapter(getActivity(), R.layout.item_order, arrayList);
 
@@ -67,6 +98,7 @@ public class Tab3Fragment extends Fragment implements MainPresenter.view {
         arrayList.add(new OrderListItem(invoiceID, invoice.getOrderDate(), invoice.getPackageType(),
                 invoice.getPrice(), invoice.getPrice(), invoice.getTarget(), invoice.getPrice()));
         orderArrayAdapter.notifyDataSetChanged();
+        progressDialog.dismiss();
     }
 
     @Override

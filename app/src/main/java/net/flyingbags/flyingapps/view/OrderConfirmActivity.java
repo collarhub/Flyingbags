@@ -1,8 +1,12 @@
 package net.flyingbags.flyingapps.view;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +43,7 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
     private String invoiceID;
     private Invoice invoice;
     private MainService mainService;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +98,32 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
                 invoice.setStatus("ready");
                 //mainService.registerInvoiceOnInvoices(invoiceID, invoice);
                 mainService.registerInvoice(invoiceID, invoice, new Route(invoice.getStatus(), invoice.getOrderDate()));
+                progressDialog = new ProgressDialog(OrderConfirmActivity.this, R.style.AppCompatAlertDialogStyle);
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progressbar_spin);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (progressDialog.isShowing()) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(OrderConfirmActivity.this);
+                            builder.setMessage("Please check your network environment.")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            try {
+                                                progressDialog.dismiss();
+                                            } catch (Exception e) {
+                                            }
+                                        }
+                                    })
+                                    .setCancelable(false)
+                                    .create()
+                                    .show();
+                        }
+                    }
+                }, 10000);
             }
         });
     }
@@ -164,6 +195,7 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
     @Override
     public void onRegisterInvoiceSuccess() {
         startActivityForResult(new Intent(this, OrderCommitActivity.class), ActionBarPresenter.REQUEST_CODE_TAB);
+        progressDialog.dismiss();
     }
 
     @Override

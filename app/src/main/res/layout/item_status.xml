@@ -31,7 +31,7 @@
                 android:textColor="@color/gray4A" />
 
             <TextView
-                android:id="@+id/textView36"
+                android:id="@+id/textView_state_estimated_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
@@ -69,11 +69,12 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout_state_ready_header"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:orientation="horizontal"
-        android:id="@+id/linearLayout_state_ready_header">
+        android:visibility="gone">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
@@ -93,6 +94,7 @@
                 android:id="@+id/imageView_state_ready_header_bottom"
                 android:layout_width="5dp"
                 android:layout_height="5dp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -113,11 +115,12 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout_state_ready_body"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:orientation="horizontal"
-        android:id="@+id/linearLayout_state_ready_body">
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/imageView_state_ready_body_stick"
@@ -144,7 +147,7 @@
                 android:textColor="@color/gray9B" />
 
             <TextView
-                android:id="@+id/textView41"
+                android:id="@+id/textView_state_ready_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -196,6 +199,7 @@
                 android:id="@+id/imageView_state_confirmed_header_bottom"
                 android:layout_width="5dp"
                 android:layout_height="5dp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -229,6 +233,7 @@
             android:layout_height="match_parent"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
+            android:visibility="invisible"
             app:srcCompat="@drawable/stick" />
 
         <LinearLayout
@@ -247,7 +252,7 @@
                 android:textColor="@color/gray9B" />
 
             <TextView
-                android:id="@+id/textView44"
+                android:id="@+id/textView_state_confirmed_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -298,6 +303,7 @@
                 android:id="@+id/imageView_state_delivering_header_bottom"
                 android:layout_width="5dp"
                 android:layout_height="5dp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -331,6 +337,7 @@
             android:layout_height="match_parent"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
+            android:visibility="invisible"
             app:srcCompat="@drawable/stick" />
 
         <LinearLayout
@@ -349,7 +356,7 @@
                 android:textColor="@color/gray9B" />
 
             <TextView
-                android:id="@+id/textView47"
+                android:id="@+id/textView_state_delivering_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -453,7 +460,7 @@
                 android:textColor="@color/gray9B" />
 
             <TextView
-                android:id="@+id/textView50"
+                android:id="@+id/textView_state_arrived_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

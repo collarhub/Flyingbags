@@ -53,7 +53,7 @@ public class LoginService implements LoginPresenter.presenter {
                         //task.getResult();
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
                         if (!task.isSuccessful()) {
-                            view.onCreateUserFailed(); // create user failed
+                            view.onCreateUserFailed(task.getException().getMessage()); // create user failed
                         }else{
                             view.onCreateUserSuccess(); // create user success, login complete.
                         }
