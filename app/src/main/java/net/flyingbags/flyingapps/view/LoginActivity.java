@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
     private Button buttonSignIn;
     private Button transparentView;
     private ProgressDialog progressDialog;
+    private Button buttonSignUp;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +92,14 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
                 }
             }
         });
+
+        buttonSignUp = (Button) findViewById(R.id.button_signup);
+        buttonSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+            }
+        });
     }
 
     @Override
@@ -127,6 +136,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
 
     private void runProgress() {
         progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        progressDialog.setCancelable(false);
         progressDialog.show();
         progressDialog.setContentView(R.layout.progressbar_spin);
         Handler handler = new Handler();

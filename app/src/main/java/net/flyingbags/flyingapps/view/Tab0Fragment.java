@@ -53,6 +53,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
         tab0Service = new Tab0Service(this);
         showMap();
         progressDialog = new ProgressDialog(getActivity(), R.style.AppCompatAlertDialogStyle);
+        progressDialog.setCancelable(false);
         progressDialog.show();
         progressDialog.setContentView(R.layout.progressbar_spin);
 
@@ -152,7 +153,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
         IntentIntegrator integrator = new IntentIntegrator(getActivity());
         integrator.setOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         integrator.addExtra("PROMPT_MESSAGE", "Scan QR Code within frame");
-        integrator.setResultDisplayDuration(1000);
+        //integrator.setResultDisplayDuration(1000);
         integrator.initiateScan();
     }
 

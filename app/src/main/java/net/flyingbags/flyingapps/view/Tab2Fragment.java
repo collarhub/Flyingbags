@@ -49,6 +49,7 @@ public class Tab2Fragment extends Fragment implements MainPresenter.view {
 
         mainService.getInvoicesVector();
         progressDialog = new ProgressDialog(getActivity(), R.style.AppCompatAlertDialogStyle);
+        progressDialog.setCancelable(false);
         progressDialog.show();
         progressDialog.setContentView(R.layout.progressbar_spin);
         Handler handler = new Handler();

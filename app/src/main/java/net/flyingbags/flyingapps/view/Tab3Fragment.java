@@ -46,6 +46,7 @@ public class Tab3Fragment extends Fragment implements MainPresenter.view {
         arrayList = new ArrayList<>();
         mainService.getInvoicesVector();
         progressDialog = new ProgressDialog(getActivity(), R.style.AppCompatAlertDialogStyle);
+        progressDialog.setCancelable(false);
         progressDialog.show();
         progressDialog.setContentView(R.layout.progressbar_spin);
         Handler handler = new Handler();

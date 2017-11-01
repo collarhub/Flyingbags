@@ -1,9 +1,12 @@
 package net.flyingbags.flyingapps.view;
 
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
     private NavTabService navTabService;
     private TabHost tabHost;
     private MainService mainService;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +138,32 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
         }
         else {
             mainService.getInvoice(result.getContents());
+            progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            progressDialog.setContentView(R.layout.progressbar_spin);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (progressDialog.isShowing()) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setMessage("Please check your network environment.")
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        try {
+                                            progressDialog.dismiss();
+                                        } catch (Exception e) {
+                                        }
+                                    }
+                                })
+                                .setCancelable(false)
+                                .create()
+                                .show();
+                    }
+                }
+            }, 10000);
         }
         //mainService.getInvoice("9999000004");
     }
@@ -181,6 +211,7 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
         intent.putExtra("invoiceID", invoiceID);
         intent.putExtra("invoice", invoice);
         startActivityForResult(intent, ActionBarPresenter.REQUEST_CODE_TAB);
+        progressDialog.dismiss();
     }
 
     @Override
