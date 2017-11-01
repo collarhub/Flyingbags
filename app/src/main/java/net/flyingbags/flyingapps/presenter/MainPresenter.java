@@ -3,6 +3,7 @@ package net.flyingbags.flyingapps.presenter;
 import android.content.Intent;
 
 import net.flyingbags.flyingapps.model.Invoice;
+import net.flyingbags.flyingapps.model.Route;
 
 import java.util.Vector;
 
@@ -26,6 +27,10 @@ public class MainPresenter {
 
         void onRegisterInvoiceOnMyListFailed();
         void onRegisterInvoiceOnMyListSuccess();
+
+        void onRegisterInvoiceSuccess();
+
+        void onRegisterInvoiceFailed();
     }
 
     public interface presenter {
@@ -33,5 +38,6 @@ public class MainPresenter {
         void registerInvoiceOnMyList(final String invoice);
         void getInvoicesVector();
         void getInvoice(final String invoice);
+        void registerInvoice(final String invoice, Invoice contents, Route route);
     }
 }

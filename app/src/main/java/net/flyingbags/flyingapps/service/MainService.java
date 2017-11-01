@@ -18,9 +18,12 @@ import com.google.zxing.integration.android.IntentResult;
 
 import net.flyingbags.flyingapps.model.Invoice;
 import net.flyingbags.flyingapps.model.NewOrder;
+import net.flyingbags.flyingapps.model.Route;
 import net.flyingbags.flyingapps.presenter.MainPresenter;
 import net.flyingbags.flyingapps.view.ScheduleDeliveryActivity;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
@@ -66,6 +69,32 @@ public class MainService implements MainPresenter.presenter {
                     }
                 });
     }
+
+    @Override
+    public void registerInvoice(final String invoice, Invoice contents, Route route){
+        contents.setStatus("ready");
+        Map<String, Object> childUpdates = new HashMap<>();
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        childUpdates.put("/invoices/"+invoice,contents);
+        childUpdates.put("/invoices/"+invoice+"/route/"+route.getDate(), route);
+        childUpdates.put("/users/"+uid+"/invoices/"+invoice,"ready");
+
+        FirebaseDatabase.getInstance().getReference().updateChildren(childUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d(TAG, "registerInvoiceOnMyList:onComplete:" + task.isSuccessful());
+                        if (!task.isSuccessful()) {
+                            view.onRegisterInvoiceFailed(); // failed
+                        }else{
+                            view.onRegisterInvoiceSuccess(); // success
+                        }
+                    }
+        });
+
+    }
+
 
     // get invoices array
     @Override
