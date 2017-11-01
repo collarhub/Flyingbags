@@ -3,6 +3,8 @@ package net.flyingbags.flyingapps.model;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 @IgnoreExtraProperties
 public class Invoice implements Serializable {
@@ -16,6 +18,8 @@ public class Invoice implements Serializable {
     private String price;
     private String status;
     private String location;
+
+    private Map<String, Route> route;
 
     public Invoice() {
         // Default constructor required for calls to DataSnapshot.getValue(newOrders.class)
@@ -32,6 +36,7 @@ public class Invoice implements Serializable {
         this.price = price;
         this.status = status;
         this.location = location;
+        //this.route = new HashMap<>();
     }
 
     public String getOrderDate() {
@@ -112,5 +117,13 @@ public class Invoice implements Serializable {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Map<String, Route> getRoute() {
+        return route;
+    }
+
+    public void setRoute(Map<String, Route> route) {
+        this.route = route;
     }
 }
