@@ -14,10 +14,16 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import net.flyingbags.flyingapps.R;
+import net.flyingbags.flyingapps.etc.CustomPlaceAutocompleteFragment;
 import net.flyingbags.flyingapps.etc.OneDayDecorator;
 import net.flyingbags.flyingapps.model.Invoice;
 import net.flyingbags.flyingapps.presenter.ActionBarPresenter;
@@ -48,6 +54,10 @@ public class ScheduleDeliveryActivity extends AppCompatActivity implements Actio
     private String invoiceID;
     private Invoice invoice;
     private TextView textViewPackageType;
+    private CustomPlaceAutocompleteFragment placeAutocompleteFragment1;
+    private EditText editTextAddressTo;
+    private CustomPlaceAutocompleteFragment placeAutocompleteFragment2;
+    private EditText editTextAddressFrom;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +111,21 @@ public class ScheduleDeliveryActivity extends AppCompatActivity implements Actio
             }
         });
 
+        placeAutocompleteFragment1 = (CustomPlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment1);
+
+        editTextAddressTo = (EditText)placeAutocompleteFragment1.getView().findViewById(R.id.place_autocomplete_search_input);
+        editTextAddressTo.setTextSize(15.0f);
+        editTextAddressTo.setText("");
+        editTextAddressTo.setHint("To");
+
+        placeAutocompleteFragment2 = (CustomPlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment2);
+
+        editTextAddressFrom = (EditText)placeAutocompleteFragment2.getView().findViewById(R.id.place_autocomplete_search_input);
+        editTextAddressFrom.setTextSize(15.0f);
+        editTextAddressFrom.setText(invoice.getDeparture());
+        editTextAddressFrom.setHint("From");
+
+
         setPackageType();
     }
 
@@ -150,11 +175,10 @@ public class ScheduleDeliveryActivity extends AppCompatActivity implements Actio
         RadioButton radioButton = (RadioButton) findViewById(checkedRadioButtonId);
         String deliveryType = radioButton.getText().toString();
 
-        EditText editTextTo = (EditText) findViewById(R.id.editText_to_address);
-        EditText editTextFrom = (EditText) findViewById(R.id.editText_from_address);
-        String target = editTextTo.getText().toString();
-        String departure = editTextFrom.getText().toString();
-        if(target.equals("") || departure.equals("")) {
+        EditText editTextAddressToDetail = (EditText)findViewById(R.id.editText_address_to_detail);
+        String target = editTextAddressTo.getText().toString() + ", " + editTextAddressToDetail.getText().toString();
+        String departure = editTextAddressFrom.getText().toString();
+        if(editTextAddressTo.getText().toString().equals("") || departure.equals("")) {
             Toast.makeText(this, "fill out \"Destination\".", Toast.LENGTH_SHORT).show();
             return;
         }

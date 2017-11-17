@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
             }
         });
 
-        buttonSignUp = (Button) findViewById(R.id.button_signup);
+        buttonSignUp = (Button) findViewById(R.id.another_signup_button);
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
