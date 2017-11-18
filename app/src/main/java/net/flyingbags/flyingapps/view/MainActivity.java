@@ -11,13 +11,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import net.flyingbags.flyingapps.R;
+import net.flyingbags.flyingapps.etc.CustomPlaceAutocompleteFragment;
 import net.flyingbags.flyingapps.model.Invoice;
 import net.flyingbags.flyingapps.presenter.ActionBarPresenter;
 import net.flyingbags.flyingapps.presenter.MainPresenter;
@@ -40,10 +45,13 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
     private View viewActionBar;
     private ImageButton imageButtonHome;
     private ImageButton imageButtonProfile;
+    private ImageButton imageButtonBack;
     private NavTabService navTabService;
     private TabHost tabHost;
     private MainService mainService;
     private ProgressDialog progressDialog;
+    private LinearLayout linearLayoutPlaceAutocompleteFragmentWrapper;
+    private CustomPlaceAutocompleteFragment placeAutocompleteFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +62,16 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
         showActionBar();
 
         viewActionBar = getSupportActionBar().getCustomView();
-        imageButtonHome = (ImageButton) viewActionBar.findViewById(R.id.home_button);
+
+        imageButtonBack = (ImageButton) viewActionBar.findViewById(R.id.back_button);
+        imageButtonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showHome();
+            }
+        });
+
+        imageButtonHome = (ImageButton) findViewById(R.id.imageButton_home);
         imageButtonHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +97,23 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
                 MainActivity.this.onTabChanged(tabId);
             }
         });
+
+        linearLayoutPlaceAutocompleteFragmentWrapper = (LinearLayout)findViewById(R.id.place_autocomplete_fragment_wrapper);
+
+        placeAutocompleteFragment = (CustomPlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment_search);
+        placeAutocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                MainActivity.this.placeAutocompleteFragment.onPlaceSelected(place);
+                ((Tab0Fragment)MainActivity.this.getSupportFragmentManager().findFragmentByTag("TAB0")).mymap(place);
+            }
+
+            @Override
+            public void onError(Status status) {
+
+            }
+        });
+
         mainService = new MainService(this);
     }
 
@@ -112,21 +146,33 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
         switch (tabId) {
             case "TAB0":
                 setTitle("My Location");
+                linearLayoutPlaceAutocompleteFragmentWrapper.setVisibility(View.VISIBLE);
+                imageButtonBack.setVisibility(View.INVISIBLE);
                 break;
             case "TAB1":
                 setTitle("Notifications");
+                linearLayoutPlaceAutocompleteFragmentWrapper.setVisibility(View.GONE);
+                imageButtonBack.setVisibility(View.VISIBLE);
                 break;
             case "TAB2":
                 setTitle("My Delivery");
+                linearLayoutPlaceAutocompleteFragmentWrapper.setVisibility(View.GONE);
+                imageButtonBack.setVisibility(View.VISIBLE);
                 break;
             case "TAB3":
                 setTitle("My Order");
+                linearLayoutPlaceAutocompleteFragmentWrapper.setVisibility(View.GONE);
+                imageButtonBack.setVisibility(View.VISIBLE);
                 break;
             case "TAB4":
                 setTitle("Settings");
+                linearLayoutPlaceAutocompleteFragmentWrapper.setVisibility(View.GONE);
+                imageButtonBack.setVisibility(View.VISIBLE);
                 break;
             case "TAB5":
                 setTitle("My Profile");
+                linearLayoutPlaceAutocompleteFragmentWrapper.setVisibility(View.GONE);
+                imageButtonBack.setVisibility(View.VISIBLE);
                 break;
         }
     }

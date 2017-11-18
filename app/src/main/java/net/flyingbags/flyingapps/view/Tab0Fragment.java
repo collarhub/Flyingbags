@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.places.Place;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,6 +29,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.zxing.integration.android.IntentIntegrator;
 
@@ -45,6 +48,8 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
     private ImageButton imageButtonScan;
     private View view;
     private ProgressDialog progressDialog;
+    private GoogleMap googleMap;
+    private Marker marker;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -166,7 +171,8 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
-                googleMap.addMarker(new MarkerOptions()
+                Tab0Fragment.this.googleMap = googleMap;
+                Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
                         .position(new LatLng(37.560933, 126.986293))
                         .title("Marker"));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.560933, 126.986293)));
@@ -180,5 +186,15 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                 });
             }
         });
+    }
+
+    public void mymap(Place place) {
+        marker.remove();
+        marker = googleMap.addMarker(new MarkerOptions()
+                .position(place.getLatLng())
+                .title(place.getName().toString()));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 15);
+        googleMap.animateCamera(cameraUpdate);
     }
 }

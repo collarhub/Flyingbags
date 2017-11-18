@@ -26,7 +26,7 @@ public class CustomPlaceAutocompleteFragment extends PlaceAutocompleteFragment{
         this.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
-                CustomPlaceAutocompleteFragment.this.place = place;
+                CustomPlaceAutocompleteFragment.this.onPlaceSelected(place);
             }
 
             @Override
@@ -42,5 +42,9 @@ public class CustomPlaceAutocompleteFragment extends PlaceAutocompleteFragment{
         super.onActivityResult(i, i1, intent);
         if(place != null)
             ((AppCompatEditText) getView().findViewById(R.id.place_autocomplete_search_input)).setText(place.getAddress());
+    }
+
+    public void onPlaceSelected(Place place) {
+        this.place = place;
     }
 }

@@ -72,7 +72,7 @@ public class ScheduleDeliveryActivity extends AppCompatActivity implements Actio
         showActionBar();
 
         viewActionBar = getSupportActionBar().getCustomView();
-        imageButtonHome = (ImageButton) viewActionBar.findViewById(R.id.home_button);
+        imageButtonHome = (ImageButton) viewActionBar.findViewById(R.id.back_button);
         imageButtonHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
