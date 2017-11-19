@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
     private ProgressDialog progressDialog;
     private LinearLayout linearLayoutPlaceAutocompleteFragmentWrapper;
     private CustomPlaceAutocompleteFragment placeAutocompleteFragment;
+    private EditText editTextSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
 
             }
         });
+        editTextSearch = (EditText)placeAutocompleteFragment.getView().findViewById(R.id.place_autocomplete_search_input);
+        editTextSearch.setTextSize(15.0f);
 
         mainService = new MainService(this);
     }

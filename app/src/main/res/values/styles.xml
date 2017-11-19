@@ -10,12 +10,12 @@
 
     <style name="LoadingTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/transparentPrimaryDark</item>
-        <item name="android:windowBackground">@drawable/loading</item>
+        <item name="android:windowBackground">@drawable/background</item>
     </style>
 
     <style name="LoginTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/transparentPrimaryDark</item>
-        <item name="android:windowBackground">@drawable/login</item>
+        <item name="android:windowBackground">@drawable/background</item>
     </style>
 
     <style name="CustomDayTextAppearance" parent="TextAppearance.AppCompat.Medium">

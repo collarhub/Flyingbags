@@ -1,6 +1,7 @@
 package net.flyingbags.flyingapps.service;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import net.flyingbags.flyingapps.presenter.LoadingPresenter;
@@ -22,12 +23,19 @@ public class LoadingService implements LoadingPresenter.presenter {
 
     @Override
     public void loading() {
-        try {
-            Thread.sleep(1500);
+        /*try {
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         activity.startActivity(new Intent(activity, LoginActivity.class));
-        activity.finish();
+        activity.finish();*/
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                activity.startActivity(new Intent(activity, LoginActivity.class));
+                activity.finish();
+            }
+        }, 1500);
     }
 }

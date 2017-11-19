@@ -33,7 +33,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
     private EditText editTextEmail;
     private EditText editTextPasswd;            // passwd 입력 editText(완료 누르면 sign in 버튼 누른효과)
     private Button buttonSignIn;
-    private Button transparentView;
     private ProgressDialog progressDialog;
     private Button buttonSignUp;
     @Override
@@ -42,7 +41,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
         setContentView(R.layout.activity_login);
 
         loginService = new LoginService(this);
-        transparentView = (Button) findViewById(R.id.login_transparent_view);
 
         editTextEmail = (EditText) findViewById(R.id.edit_email);
         editTextPasswd = (EditText) findViewById(R.id.edit_passwd);
@@ -69,7 +67,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
                     else {
                         loginService.signIn(editTextEmail.getText().toString(), editTextPasswd.getText().toString());
                         runProgress();
-                        transparentView.setVisibility(View.VISIBLE);
                     }
                     return true;
                 }
@@ -88,7 +85,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
                 else {
                     loginService.signIn(editTextEmail.getText().toString(), editTextPasswd.getText().toString());
                     runProgress();
-                    transparentView.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -105,7 +101,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
     @Override
     public void onSignInFailed() {
         ((LinearLayout) findViewById(R.id.login_linear_forget)).setVisibility(View.VISIBLE);
-        transparentView.setVisibility(View.INVISIBLE);
         progressDialog.dismiss();
     }
 

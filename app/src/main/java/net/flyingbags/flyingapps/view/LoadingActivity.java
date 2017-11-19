@@ -4,6 +4,9 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -13,8 +16,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import net.flyingbags.flyingapps.R;
 import net.flyingbags.flyingapps.presenter.LoadingPresenter;
 import net.flyingbags.flyingapps.service.LoadingService;
 
@@ -25,7 +31,6 @@ import net.flyingbags.flyingapps.service.LoadingService;
  */
 
 public class LoadingActivity extends AppCompatActivity implements LoadingPresenter.view {
-
     private LoadingService loadingService;
     private static final int PERMISSIONS_REQUEST_CAMERA_UNCHECKED = 100;
     private static final int PERMISSIONS_REQUEST_CAMERA_CHECKED = 101;
@@ -33,6 +38,7 @@ public class LoadingActivity extends AppCompatActivity implements LoadingPresent
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_loading);
         // presenter를 통해서 2초 loading
         // mvp로 안해도 되는데 그냥 통일성 있게 해봤음
         loadingService = new LoadingService(this);

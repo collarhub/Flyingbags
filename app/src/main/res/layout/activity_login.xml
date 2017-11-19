@@ -4,20 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <Button
-        android:id="@+id/login_transparent_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/transparent_view"
-        android:text="Button"
-        android:textColor="@android:color/transparent"
-        android:visibility="invisible"
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.108"
+        app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/edit_email"
@@ -62,30 +61,30 @@
         android:id="@+id/image_email"
         android:layout_width="26dp"
         android:layout_height="19dp"
-        app:srcCompat="@drawable/email"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.178" />
+        app:srcCompat="@drawable/email" />
 
     <ImageView
         android:id="@+id/image_passwd"
         android:layout_width="24dp"
         android:layout_height="39dp"
-        app:srcCompat="@drawable/passwd"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.177"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.177"
-        app:layout_constraintVertical_bias="0.596" />
+        app:layout_constraintVertical_bias="0.596"
+        app:srcCompat="@drawable/passwd" />
 
     <LinearLayout
+        android:id="@+id/login_linear1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/login_linear1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -121,15 +120,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/login_linear2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/login_linear2"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintVertical_bias="0.805">
 
         <ImageButton

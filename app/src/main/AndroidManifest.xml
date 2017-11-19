@@ -3,7 +3,6 @@
     package="net.flyingbags.flyingapps">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -12,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:hardwareAccelerated="false"
         android:largeHeap="true">
+        <!--android:hardwareAccelerated="false">-->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBw5xn9pWy9p6XiXb6YD0Z9CBvSMBRa45s" />
