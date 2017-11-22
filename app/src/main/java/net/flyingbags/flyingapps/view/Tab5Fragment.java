@@ -21,7 +21,7 @@ import net.flyingbags.flyingapps.presenter.ProfilePresenter;
 
 import java.util.regex.Pattern;
 
-public class Tab5Fragment extends Fragment implements ProfilePresenter.view{
+public class Tab5Fragment extends Fragment{
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     private static final String TAG = Tab5Fragment.class.getSimpleName();
@@ -42,22 +42,6 @@ public class Tab5Fragment extends Fragment implements ProfilePresenter.view{
         getAddress();
 
         return view;
-    }
-
-
-    private void displayProfile(String address){
-        mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
-
-        if(user != null){
-            textView_NameContent.setText(user.getDisplayName());
-            textView_EmailContent.setText(user.getEmail());
-            textView_BasicAddressContent.setText(address);
-        }else{
-            textView_NameContent.setText("null");
-            textView_EmailContent.setText("null");
-            textView_BasicAddressContent.setText("null");
-        }
     }
 
     private void getAddress(){
@@ -82,13 +66,18 @@ public class Tab5Fragment extends Fragment implements ProfilePresenter.view{
                 });
     }
 
-    @Override
-    public void onGetUserProfileSuccess(User presentInfo) {
+    private void displayProfile(String address){
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
 
-    }
-
-    @Override
-    public void onGetUserProfileFailed() {
-
+        if(user != null){
+            textView_NameContent.setText(user.getDisplayName());
+            textView_EmailContent.setText(user.getEmail());
+            textView_BasicAddressContent.setText(address);
+        }else{
+            textView_NameContent.setText("null");
+            textView_EmailContent.setText("null");
+            textView_BasicAddressContent.setText("null");
+        }
     }
 }
