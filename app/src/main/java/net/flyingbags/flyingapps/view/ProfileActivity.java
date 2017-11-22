@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import net.flyingbags.flyingapps.R;
+import net.flyingbags.flyingapps.model.User;
 import net.flyingbags.flyingapps.presenter.ProfilePresenter;
 
 /**
@@ -54,5 +55,10 @@ public class ProfileActivity extends AppCompatActivity implements ProfilePresent
         mAuth.signOut();
         onBackPressed();
     }
+
+    @Override
+    public void onGetUserProfileSuccess(User presentInfo){}
+    @Override
+    public void onGetUserProfileFailed(){}
 
 }
