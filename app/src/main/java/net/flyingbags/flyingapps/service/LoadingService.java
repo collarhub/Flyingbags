@@ -35,8 +35,7 @@ public class LoadingService implements LoadingPresenter.presenter {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                //activity.startActivity(new Intent(activity, LoginActivity.class));
-                activity.startActivity(new Intent(activity, ScheduleDeliveryActivity.class));
+                activity.startActivity(new Intent(activity, LoginActivity.class));
                 activity.finish();
             }
         }, 1500);

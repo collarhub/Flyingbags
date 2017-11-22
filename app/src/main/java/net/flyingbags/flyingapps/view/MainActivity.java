@@ -279,15 +279,24 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
 
     @Override
     public void onGetInvoiceSuccess(String invoiceID, Invoice invoice) {
-        Intent intent = new Intent(this, ScheduleDeliveryActivity.class);
-        intent.putExtra("invoiceID", invoiceID);
-        intent.putExtra("invoice", invoice);
-        startActivityForResult(intent, ActionBarPresenter.REQUEST_CODE_TAB);
+        if(invoice.getStatus().equals("idle") || invoiceID.equals("9999000004")) {
+            Intent intent = new Intent(this, ScheduleDeliveryActivity.class);
+            intent.putExtra("invoiceID", invoiceID);
+            intent.putExtra("invoice", invoice);
+            startActivityForResult(intent, ActionBarPresenter.REQUEST_CODE_TAB);
+        }
+        else {
+            Toast.makeText(this, "Invalid QR Code!", Toast.LENGTH_SHORT).show();
+        }
         progressDialog.dismiss();
     }
 
     @Override
     public void onGetInvoiceFailed() {
+        if(progressDialog != null) {
+            Toast.makeText(this, "Unregistered QR Code!", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+        }
     }
 
     @Override

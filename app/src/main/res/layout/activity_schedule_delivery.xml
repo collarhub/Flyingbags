@@ -41,6 +41,7 @@
                     android:id="@+id/radioGroup_delivery_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checkedButton="@+id/radioButton_home"
                     android:orientation="horizontal"
                     android:paddingTop="10dp">
 
@@ -294,7 +295,7 @@
                         android:paddingRight="37dp">
 
                         <ImageButton
-                            android:id="@+id/imageButton5"
+                            android:id="@+id/imageButton_small_plus"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:layout_gravity="center_vertical"
@@ -313,7 +314,7 @@
                             android:textSize="18sp" />
 
                         <ImageButton
-                            android:id="@+id/imageButton6"
+                            android:id="@+id/imageButton_small_minus"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:layout_gravity="center_vertical"
@@ -332,7 +333,7 @@
                         android:paddingRight="25dp">
 
                         <ImageButton
-                            android:id="@+id/imageButton7"
+                            android:id="@+id/imageButton_medium_plus"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:layout_gravity="center_vertical"
@@ -351,7 +352,7 @@
                             android:textSize="18sp" />
 
                         <ImageButton
-                            android:id="@+id/imageButton8"
+                            android:id="@+id/imageButton_medium_minus"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:layout_gravity="center_vertical"
@@ -370,7 +371,7 @@
                         android:paddingRight="13dp">
 
                         <ImageButton
-                            android:id="@+id/imageButton9"
+                            android:id="@+id/imageButton_large_plus"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:layout_gravity="center_vertical"
@@ -389,7 +390,7 @@
                             android:textSize="18sp" />
 
                         <ImageButton
-                            android:id="@+id/imageButton10"
+                            android:id="@+id/imageButton_large_minus"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:layout_gravity="center_vertical"
@@ -417,8 +418,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_signin"
                     android:text="Next"
-                    android:textColor="@android:color/white"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
 
         </LinearLayout>
