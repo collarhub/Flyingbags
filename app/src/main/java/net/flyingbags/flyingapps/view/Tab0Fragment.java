@@ -13,14 +13,17 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,8 +44,11 @@ import com.google.zxing.integration.android.IntentIntegrator;
 
 import net.flyingbags.flyingapps.R;
 import net.flyingbags.flyingapps.etc.CustomPlaceAutocompleteFragment;
+import net.flyingbags.flyingapps.etc.Shop;
 import net.flyingbags.flyingapps.presenter.Tab0Presenter;
 import net.flyingbags.flyingapps.service.Tab0Service;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by User on 2017-10-09.
@@ -57,6 +63,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
     private ProgressDialog progressDialog;
     private GoogleMap googleMap;
     private Marker marker;
+    private Marker marker2;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -84,6 +91,13 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
             }
         });
 
+        ((LinearLayout)getActivity().findViewById(R.id.place_autocomplete_fragment_wrapper)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((LinearLayout)view.findViewById(R.id.linearLayout_shop_info)).setVisibility(View.GONE);
+            }
+        });
+
         return view;
     }
 
@@ -96,6 +110,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
         ObjectAnimator objectAnimatorButton;
         ObjectAnimator objectAnimatorText;
         if(imageButtonScan.getVisibility() == View.INVISIBLE) {
+            ((LinearLayout)view.findViewById(R.id.linearLayout_shop_info)).setVisibility(View.GONE);
             linearLayoutTransparentGray.setVisibility(View.VISIBLE);
             placeAutocompleteFragmentWrapper.setVisibility(View.INVISIBLE);
             imageButtonMenu.setImageResource(R.drawable.x);
@@ -182,52 +197,109 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 Tab0Fragment.this.googleMap = googleMap;
+                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(LatLng latLng) {
+                        ((LinearLayout)view.findViewById(R.id.linearLayout_shop_info)).setVisibility(View.GONE);
+                    }
+                });
+                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        Shop shop = (Shop)marker.getTag();
+                        ((TextView)view.findViewById(R.id.textView_shop_name)).setText(shop.getId() + ". " + shop.getName());
+                        ((TextView)view.findViewById(R.id.textView_shop_address)).setText(shop.getAddress());
+                        ((TextView)view.findViewById(R.id.textView_shop_simple_address)).setText(shop.getSimpleAddress());
+                        ((ImageView)view.findViewById(R.id.imageView_shop_image)).setImageResource(shop.getDrawable());
+                        ((LinearLayout)view.findViewById(R.id.linearLayout_shop_info)).setVisibility(View.VISIBLE);
+                        return false;
+                    }
+                });
+                Bitmap bitmap;
                 int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 35, getActivity().getResources().getDisplayMetrics());
                 int height = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 35, getActivity().getResources().getDisplayMetrics());
                 // 3.3.1.S : 마포구 서교동 339-1
-                BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap("shop1", width, height));
+                bitmap = resizeBitmap("shop1", width, height);
+                BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(bitmap);
+                bitmap.recycle();
+                bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
                         .position(new LatLng(37.5549976, 126.9249692))
-                        .title("Marker")
+                        .title("3.3.1.S")
                         .icon(icon));
+                marker.setTag(new Shop(1, "3.3.1.S", "마포구 서교동 339-1", "서교동", R.drawable.three));
                 // 체크# : 마포구 홍익로10 푸르지오상가 139 140호
-                icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap("shop2", width, height));
+                bitmap = resizeBitmap("shop2", width, height);
+                icon = BitmapDescriptorFactory.fromBitmap(bitmap);
+                bitmap.recycle();
+                bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
                         .position(new LatLng(37.5538075, 126.9212728))
-                        .title("Marker")
+                        .title("check#")
                         .icon(icon));
+                marker.setTag(new Shop(2, "check#", "마포구 홍익로10 푸르지오상가 139 140호", "서교동", R.drawable.checkshop));
                 // 어나더어썸 : 마포구 서교동 339-3 새봄빌딩 102호
-                icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap("shop3", width, height));
+                bitmap = resizeBitmap("shop3", width, height);
+                icon = BitmapDescriptorFactory.fromBitmap(bitmap);
+                bitmap.recycle();
+                bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.5549976, 126.9249692))
-                        .title("Marker")
+                        .position(new LatLng(37.5542494, 126.9245967))
+                        .title("Another Awesome")
                         .icon(icon));
+                marker.setTag(new Shop(3, "Another Awesome", "마포구 서교동 339-3 새봄빌딩 102호", "서교동", R.drawable.anotherawesome));
                 // Moi오이 : 마포구 서교동 336-15 1층 Moi오이
-                icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap("shop4", width, height));
+                bitmap = resizeBitmap("shop4", width, height);
+                icon = BitmapDescriptorFactory.fromBitmap(bitmap);
+                bitmap.recycle();
+                bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.5549976, 126.9249692))
-                        .title("Marker")
+                        .position(new LatLng(37.5541017, 126.9255936))
+                        .title("Moi")
                         .icon(icon));
+                marker.setTag(new Shop(4, "Moi", "마포구 서교동 336-15 1층 Moi오이", "서교동", R.drawable.moi));
                 // 바이엘 : 서울 마포구 와우산로 27길 38
-                icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap("shop5", width, height));
+                bitmap = resizeBitmap("shop5", width, height);
+                icon = BitmapDescriptorFactory.fromBitmap(bitmap);
+                bitmap.recycle();
+                bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.5549976, 126.9249692))
-                        .title("Marker")
+                        .position(new LatLng(37.5546768, 126.9243302))
+                        .title("by L")
                         .icon(icon));
+                marker.setTag(new Shop(5, "by L", "서울 마포구 와우산로 27길 38", "서교동", R.drawable.byl));
                 // 1# : 서울 마포구 서교동 332-12
-                icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap("shop6", width, height));
+                bitmap = resizeBitmap("shop6", width, height);
+                icon = BitmapDescriptorFactory.fromBitmap(bitmap);
+                bitmap.recycle();
+                bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.5549976, 126.9249692))
-                        .title("Marker")
+                        .position(new LatLng(37.5549583, 126.9237773))
+                        .title("1#")
                         .icon(icon));
+                marker.setTag(new Shop(6, "1#", "서울 마포구 서교동 332-12", "서교동", R.drawable.oneshop));
                 // ANUE : 서울 마포구 서교동 347-17 1층
-                icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap("shop7", width, height));
+                bitmap = resizeBitmap("shop7", width, height);
+                icon = BitmapDescriptorFactory.fromBitmap(bitmap);
+                bitmap.recycle();
+                bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.5549976, 126.9249692))
-                        .title("Marker")
+                        .position(new LatLng(37.5554262, 126.9229183))
+                        .title("ANUE")
                         .icon(icon));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.560933, 126.986293)));
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(37.560933, 126.986293), 15);
+                marker.setTag(new Shop(7, "ANUE", "서울 마포구 서교동 347-17 1층", "서교동", R.drawable.anue));
+                // 첸트로 : 서울 마포구 노고산동 56-29
+                bitmap = resizeBitmap("shop8", width, height);
+                icon = BitmapDescriptorFactory.fromBitmap(bitmap);
+                bitmap.recycle();
+                bitmap = null;
+                Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(37.5547195, 126.9309247))
+                        .title("첸트로")
+                        .icon(icon));
+                marker.setTag(new Shop(8, "첸트로", "서울 마포구 노고산동 56-29", "노고산동", R.drawable.chen));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.554816, 126.924351)));
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(37.554816, 126.924351), 15);
                 googleMap.animateCamera(cameraUpdate);
                 googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
                     @Override
@@ -235,13 +307,16 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                         progressDialog.dismiss();
                     }
                 });
+
             }
         });
     }
 
     public void mymap(Place place) {
-        marker.remove();
-        marker = googleMap.addMarker(new MarkerOptions()
+        if(marker2 != null) {
+            marker2.remove();
+        }
+        marker2 = googleMap.addMarker(new MarkerOptions()
                 .position(place.getLatLng())
                 .title(place.getName().toString()));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
