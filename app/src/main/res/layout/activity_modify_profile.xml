@@ -23,8 +23,8 @@
                 android:textColor="@color/gray4A"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textView_NameContent"
+            <EditText
+                android:id="@+id/editText_NameContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -33,31 +33,6 @@
 
             <TextView
                 android:id="@+id/textView_Blank1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:padding="5dp" />
-
-            <TextView
-                android:id="@+id/textView_EmailTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="7dp"
-                android:padding="5dp"
-                android:text="E-mail"
-                android:textColor="@color/gray4A"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView_EmailContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:padding="5dp"
-                android:textColor="@color/gray4A" />
-
-            <TextView
-                android:id="@+id/textView_Blank2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -73,13 +48,26 @@
                 android:textColor="@color/gray4A"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textView_BasicAddressContent"
+            <EditText
+                android:id="@+id/editText_BasicAddressContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:padding="5dp"
                 android:textColor="@color/gray4A" />
+
+            <TextView
+                android:id="@+id/textView_Blank2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp" />
+
+            <Button
+                android:id="@+id/button_Accepted"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Accepted" />
 
         </LinearLayout>
     </ScrollView>

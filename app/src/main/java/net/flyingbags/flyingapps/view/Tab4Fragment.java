@@ -46,16 +46,14 @@ public class Tab4Fragment extends Fragment {
         textView_MyProfileSettings.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
+                onClicktextView_MyProfileSettings();
             }
-
         });
         textView_ChangePassword.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
+                onClicktextView_ChangePassword();
             }
-
         });
         textView_ReportaProblem.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -86,6 +84,16 @@ public class Tab4Fragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void onClicktextView_MyProfileSettings(){
+        Context baseContext= this.getActivity().getBaseContext();
+        this.startActivity(new Intent(baseContext, ModifyProfileActivity.class));
+    }
+
+    private void onClicktextView_ChangePassword(){
+        Context baseContext= this.getActivity().getBaseContext();
+        this.startActivity(new Intent(baseContext, ModifyPasswordActivity.class));
     }
 
     private void onClicktextView_ReportaProblem(){
