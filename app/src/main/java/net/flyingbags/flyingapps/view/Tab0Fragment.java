@@ -8,16 +8,20 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,12 +32,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 import net.flyingbags.flyingapps.R;
+import net.flyingbags.flyingapps.etc.CustomPlaceAutocompleteFragment;
 import net.flyingbags.flyingapps.presenter.Tab0Presenter;
 import net.flyingbags.flyingapps.service.Tab0Service;
 
@@ -85,10 +92,12 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
         final ImageButton imageButtonScan = (ImageButton) view.findViewById(R.id.imageButton_scan);
         final TextView textViewScan = (TextView) view.findViewById(R.id.textView_scan);
         final ImageButton linearLayoutTransparentGray = (ImageButton) view.findViewById(R.id.transparentGray);
+        final LinearLayout placeAutocompleteFragmentWrapper = (LinearLayout)getActivity().findViewById(R.id.place_autocomplete_fragment_wrapper);
         ObjectAnimator objectAnimatorButton;
         ObjectAnimator objectAnimatorText;
         if(imageButtonScan.getVisibility() == View.INVISIBLE) {
             linearLayoutTransparentGray.setVisibility(View.VISIBLE);
+            placeAutocompleteFragmentWrapper.setVisibility(View.INVISIBLE);
             imageButtonMenu.setImageResource(R.drawable.x);
             imageButtonScan.setVisibility(View.VISIBLE);
             objectAnimatorButton = ObjectAnimator.ofFloat(imageButtonScan, "translationY", imageButtonMenu.getTop() - imageButtonScan.getTop(), imageButtonMenu.getTop() - imageButtonScan.getTop() - 25);
@@ -139,6 +148,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                         public void onAnimationEnd(Animator animation) {
                             imageButtonScan.setVisibility(View.INVISIBLE);
                             linearLayoutTransparentGray.setVisibility(View.INVISIBLE);
+                            placeAutocompleteFragmentWrapper.setVisibility(View.VISIBLE);
                         }
                         @Override
                         public void onAnimationCancel(Animator animation) {}
@@ -172,9 +182,50 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 Tab0Fragment.this.googleMap = googleMap;
+                int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 35, getActivity().getResources().getDisplayMetrics());
+                int height = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 35, getActivity().getResources().getDisplayMetrics());
+                // 3.3.1.S : 마포구 서교동 339-1
+                BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap("shop1", width, height));
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.560933, 126.986293))
-                        .title("Marker"));
+                        .position(new LatLng(37.5549976, 126.9249692))
+                        .title("Marker")
+                        .icon(icon));
+                // 체크# : 마포구 홍익로10 푸르지오상가 139 140호
+                icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap("shop2", width, height));
+                Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(37.5538075, 126.9212728))
+                        .title("Marker")
+                        .icon(icon));
+                // 어나더어썸 : 마포구 서교동 339-3 새봄빌딩 102호
+                icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap("shop3", width, height));
+                Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(37.5549976, 126.9249692))
+                        .title("Marker")
+                        .icon(icon));
+                // Moi오이 : 마포구 서교동 336-15 1층 Moi오이
+                icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap("shop4", width, height));
+                Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(37.5549976, 126.9249692))
+                        .title("Marker")
+                        .icon(icon));
+                // 바이엘 : 서울 마포구 와우산로 27길 38
+                icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap("shop5", width, height));
+                Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(37.5549976, 126.9249692))
+                        .title("Marker")
+                        .icon(icon));
+                // 1# : 서울 마포구 서교동 332-12
+                icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap("shop6", width, height));
+                Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(37.5549976, 126.9249692))
+                        .title("Marker")
+                        .icon(icon));
+                // ANUE : 서울 마포구 서교동 347-17 1층
+                icon = BitmapDescriptorFactory.fromBitmap(resizeBitmap("shop7", width, height));
+                Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(37.5549976, 126.9249692))
+                        .title("Marker")
+                        .icon(icon));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.560933, 126.986293)));
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(37.560933, 126.986293), 15);
                 googleMap.animateCamera(cameraUpdate);
@@ -196,5 +247,10 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 15);
         googleMap.animateCamera(cameraUpdate);
+    }
+
+    public Bitmap resizeBitmap(String drawableName, int width, int height){
+        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(),getResources().getIdentifier(drawableName, "drawable", getActivity().getPackageName()));
+        return Bitmap.createScaledBitmap(imageBitmap, width, height, false);
     }
 }

@@ -3,9 +3,12 @@ package net.flyingbags.flyingapps.service;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TabWidget;
@@ -53,7 +56,9 @@ public class NavTabService implements NavTabPresenter.presenter {
         tabWidget.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
         for(int i = 0; i < tabWidget.getTabCount(); i++) {
             final View tab = tabWidget.getChildAt(i);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(112,112);
+            final int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, activity.getResources().getDisplayMetrics());
+            final int height = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, activity.getResources().getDisplayMetrics());
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width, height);
             if(i == 1)
                 lp.setMargins(0, 0, 20, 0);
             else if(i == 2) {

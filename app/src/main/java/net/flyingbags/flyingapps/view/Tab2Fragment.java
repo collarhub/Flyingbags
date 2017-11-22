@@ -80,7 +80,7 @@ public class Tab2Fragment extends Fragment implements MainPresenter.view {
 
     @Override
     public void onGetInvoicesVectorFailed() {
-
+        progressDialog.dismiss();
     }
 
     @Override
@@ -88,6 +88,7 @@ public class Tab2Fragment extends Fragment implements MainPresenter.view {
         for(String invoiceID : invoices) {
             mainService.getInvoice(invoiceID);
         }
+        progressDialog.dismiss();
     }
 
     @Override
@@ -99,7 +100,7 @@ public class Tab2Fragment extends Fragment implements MainPresenter.view {
 
     @Override
     public void onGetInvoiceFailed() {
-
+        progressDialog.dismiss();
     }
 
     @Override
