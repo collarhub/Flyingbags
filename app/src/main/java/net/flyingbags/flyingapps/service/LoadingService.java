@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import net.flyingbags.flyingapps.presenter.LoadingPresenter;
 import net.flyingbags.flyingapps.view.LoginActivity;
 import net.flyingbags.flyingapps.view.MainActivity;
+import net.flyingbags.flyingapps.view.ScheduleDeliveryActivity;
 
 /**
  * Created by User on 2017-10-07.
@@ -34,7 +35,8 @@ public class LoadingService implements LoadingPresenter.presenter {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                activity.startActivity(new Intent(activity, LoginActivity.class));
+                //activity.startActivity(new Intent(activity, LoginActivity.class));
+                activity.startActivity(new Intent(activity, ScheduleDeliveryActivity.class));
                 activity.finish();
             }
         }, 1500);
