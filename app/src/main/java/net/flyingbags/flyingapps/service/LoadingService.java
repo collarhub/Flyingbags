@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import net.flyingbags.flyingapps.presenter.LoadingPresenter;
 import net.flyingbags.flyingapps.view.LoginActivity;
 import net.flyingbags.flyingapps.view.MainActivity;
+import net.flyingbags.flyingapps.view.ScheduleDeliveryActivity;
 
 /**
  * Created by User on 2017-10-07.

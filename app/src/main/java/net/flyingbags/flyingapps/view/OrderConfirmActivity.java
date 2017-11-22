@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.flyingbags.flyingapps.R;
@@ -44,6 +45,7 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
     private Invoice invoice;
     private MainService mainService;
     private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -194,12 +196,15 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
 
     @Override
     public void onRegisterInvoiceSuccess() {
-        startActivityForResult(new Intent(this, OrderCommitActivity.class), ActionBarPresenter.REQUEST_CODE_TAB);
+        Intent intent = new Intent(this, OrderCommitActivity.class);
+        intent.putExtra("estimated", invoice.getMaxDateExpected());
+        startActivityForResult(intent, ActionBarPresenter.REQUEST_CODE_TAB);
         progressDialog.dismiss();
     }
 
     @Override
     public void onRegisterInvoiceFailed() {
-
+        Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show();
+        progressDialog.dismiss();
     }
 }

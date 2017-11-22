@@ -25,9 +25,11 @@ import net.flyingbags.flyingapps.service.LoginService;
 public class SignupActivity extends AppCompatActivity implements LoginPresenter.view {
     private LoginService loginService;
     private Button buttonSignUp;
+    private EditText editTextName;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextConfirm;
+    private EditText editTextAddress;
     private TextView textViewMessage;
     private ProgressDialog progressDialog;
     @Override
@@ -37,15 +39,20 @@ public class SignupActivity extends AppCompatActivity implements LoginPresenter.
         loginService = new LoginService(this);
 
         textViewMessage = (TextView) findViewById(R.id.textView_signup_message);
+        editTextName = (EditText) findViewById(R.id.editText_signup_name);
         editTextEmail = (EditText) findViewById(R.id.editText_signup_email);
         editTextPassword = (EditText) findViewById(R.id.editText_signup_password);
         editTextConfirm = (EditText) findViewById(R.id.editText_signup_confirm);
+        editTextAddress = (EditText) findViewById(R.id.editText_signup_address);
         buttonSignUp = (Button) findViewById(R.id.button_signup);
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(signupCheck(editTextEmail.getText().toString(), editTextPassword.getText().toString(), editTextConfirm.getText().toString())) {
-                    loginService.createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+                if(signupCheck(editTextName.getText().toString(), editTextEmail.getText().toString(),
+                        editTextPassword.getText().toString(), editTextConfirm.getText().toString(),
+                        editTextAddress.getText().toString())) {
+                    loginService.createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString(),
+                                            editTextName.getText().toString(), editTextAddress.getText().toString());
                     progressDialog = new ProgressDialog(SignupActivity.this, R.style.AppCompatAlertDialogStyle);
                     progressDialog.setCancelable(false);
                     progressDialog.show();
@@ -77,8 +84,12 @@ public class SignupActivity extends AppCompatActivity implements LoginPresenter.
         });
     }
 
-    private boolean signupCheck(String email, String password, String confirm) {
-        if(email.equals("") || password.equals("") || confirm.equals("")) {
+    private boolean signupCheck(String name, String email, String password, String confirm, String address) {
+        if(name.equals("") || email.equals("") || password.equals("") || confirm.equals("") || address.equals("")) {
+            if(name.equals("")) {
+                textViewMessage.setText("fill out name");
+                return false;
+            }
             if(email.equals("")) {
                 textViewMessage.setText("fill out email");
                 return false;
@@ -89,6 +100,10 @@ public class SignupActivity extends AppCompatActivity implements LoginPresenter.
             }
             if(confirm.equals("")) {
                 textViewMessage.setText("fill out confirm");
+                return false;
+            }
+            if(address.equals("")) {
+                textViewMessage.setText("fill out address");
                 return false;
             }
         }

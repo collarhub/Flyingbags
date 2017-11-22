@@ -58,6 +58,14 @@ public class ScheduleDeliveryActivity extends AppCompatActivity implements Actio
     private EditText editTextAddressTo;
     private CustomPlaceAutocompleteFragment placeAutocompleteFragment2;
     private EditText editTextAddressFrom;
+    private RadioButton radioButtonAirport;
+    private RadioGroup radioGroup;
+    private ImageButton imageButtonSmallPlus;
+    private ImageButton imageButtonSmallMinus;
+    private ImageButton imageButtonMediumPlus;
+    private ImageButton imageButtonMediumMinus;
+    private ImageButton imageButtonLargePlus;
+    private ImageButton imageButtonLargeMinus;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +132,60 @@ public class ScheduleDeliveryActivity extends AppCompatActivity implements Actio
         editTextAddressFrom.setTextSize(15.0f);
         editTextAddressFrom.setText(invoice.getDeparture());
         editTextAddressFrom.setHint("From");
+
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup_delivery_type);
+        radioButtonAirport = (RadioButton) findViewById(R.id.radioButton_airport);
+        radioButtonAirport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ScheduleDeliveryActivity.this, "coming soon...", Toast.LENGTH_SHORT).show();
+                radioGroup.check(R.id.radioButton_home);
+            }
+        });
+
+        imageButtonSmallPlus = (ImageButton) findViewById(R.id.imageButton_small_plus);
+        imageButtonSmallMinus = (ImageButton) findViewById(R.id.imageButton_small_minus);
+        imageButtonMediumPlus = (ImageButton) findViewById(R.id.imageButton_medium_plus);
+        imageButtonMediumMinus = (ImageButton) findViewById(R.id.imageButton_medium_minus);
+        imageButtonLargePlus = (ImageButton) findViewById(R.id.imageButton_large_plus);
+        imageButtonLargeMinus = (ImageButton) findViewById(R.id.imageButton_large_minus);
+
+        imageButtonSmallPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ScheduleDeliveryActivity.this, "coming soon..", Toast.LENGTH_SHORT).show();
+            }
+        });
+        imageButtonSmallMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ScheduleDeliveryActivity.this, "coming soon..", Toast.LENGTH_SHORT).show();
+            }
+        });
+        imageButtonMediumPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ScheduleDeliveryActivity.this, "coming soon..", Toast.LENGTH_SHORT).show();
+            }
+        });
+        imageButtonMediumMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ScheduleDeliveryActivity.this, "coming soon..", Toast.LENGTH_SHORT).show();
+            }
+        });
+        imageButtonLargePlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ScheduleDeliveryActivity.this, "coming soon..", Toast.LENGTH_SHORT).show();
+            }
+        });
+        imageButtonLargeMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ScheduleDeliveryActivity.this, "coming soon..", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         setPackageType();
