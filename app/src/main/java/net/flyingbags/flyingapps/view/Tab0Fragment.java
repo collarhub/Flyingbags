@@ -64,6 +64,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
     private GoogleMap googleMap;
     private Marker marker;
     private Marker marker2;
+    private Marker marker3;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -110,6 +111,9 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
         ObjectAnimator objectAnimatorButton;
         ObjectAnimator objectAnimatorText;
         if(imageButtonScan.getVisibility() == View.INVISIBLE) {
+            if(marker3 != null && marker3.isInfoWindowShown()) {
+                marker3.hideInfoWindow();
+            }
             ((LinearLayout)view.findViewById(R.id.linearLayout_shop_info)).setVisibility(View.GONE);
             linearLayoutTransparentGray.setVisibility(View.VISIBLE);
             placeAutocompleteFragmentWrapper.setVisibility(View.INVISIBLE);
@@ -195,17 +199,21 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
         fragmentTransaction.commit();
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
-            public void onMapReady(GoogleMap googleMap) {
+            public void onMapReady(final GoogleMap googleMap) {
                 Tab0Fragment.this.googleMap = googleMap;
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(LatLng latLng) {
                         ((LinearLayout)view.findViewById(R.id.linearLayout_shop_info)).setVisibility(View.GONE);
+                        if(marker3 != null && marker3.isInfoWindowShown()) {
+                            marker3.hideInfoWindow();
+                        }
                     }
                 });
                 googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
+                        marker3 = marker;
                         Shop shop = (Shop)marker.getTag();
                         ((TextView)view.findViewById(R.id.textView_shop_name)).setText(shop.getId() + ". " + shop.getName());
                         ((TextView)view.findViewById(R.id.textView_shop_address)).setText(shop.getAddress());
@@ -322,6 +330,13 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 15);
         googleMap.animateCamera(cameraUpdate);
+    }
+
+    public void infoClear() {
+        ((LinearLayout)view.findViewById(R.id.linearLayout_shop_info)).setVisibility(View.GONE);
+        if(marker3 != null && marker3.isInfoWindowShown()) {
+            marker3.hideInfoWindow();
+        }
     }
 
     public Bitmap resizeBitmap(String drawableName, int width, int height){

@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
             public void onPlaceSelected(Place place) {
                 MainActivity.this.placeAutocompleteFragment.onPlaceSelected(place);
                 ((Tab0Fragment)MainActivity.this.getSupportFragmentManager().findFragmentByTag("TAB0")).mymap(place);
+                ((Tab0Fragment)MainActivity.this.getSupportFragmentManager().findFragmentByTag("TAB0")).infoClear();
             }
 
             @Override
