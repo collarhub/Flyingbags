@@ -1,5 +1,7 @@
 package net.flyingbags.flyingapps.presenter;
 
+import net.flyingbags.flyingapps.model.User;
+
 /**
  * Created by ernest on 17. 10. 8.
  * mi gu hyun (not implemented)
@@ -7,8 +9,11 @@ package net.flyingbags.flyingapps.presenter;
 
 public class ProfilePresenter {
     public interface view {
+        void onGetUserProfileSuccess(User presentInfo);
+        void onGetUserProfileFailed();
     }
 
-    public interface presenter extends net.flyingbags.flyingapps.presenter.presenter {
+    public interface presenter {
+        void getUserProfile();
     }
 }

@@ -2,10 +2,6 @@ package net.flyingbags.flyingapps.model;
 
 import java.io.Serializable;
 
-/**
- * Created by ernest on 17. 10. 24.
- */
-
 public class Admin implements Serializable {
     private String name;
 

@@ -4,7 +4,6 @@ import android.app.Activity;
 
 /**
  * Created by User on 2017-10-07.
- * Login presenter interface
  */
 
 public class LoginPresenter {
