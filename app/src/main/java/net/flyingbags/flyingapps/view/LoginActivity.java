@@ -93,9 +93,14 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+                buttonSignUpCallBack();
             }
         });
+    }
+
+    void buttonSignUpCallBack(){
+        startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+        this.finish();
     }
 
     @Override

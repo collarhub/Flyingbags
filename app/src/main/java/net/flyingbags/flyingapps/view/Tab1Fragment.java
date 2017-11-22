@@ -9,15 +9,11 @@ import android.view.ViewGroup;
 
 import net.flyingbags.flyingapps.R;
 
-/**
- * Created by User on 2017-10-09.
- */
-
 public class Tab1Fragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_tab1, container, false);
+        View view = inflater.inflate(R.layout.fragment_tab1_noti, container, false);
         return view;
     }
 }

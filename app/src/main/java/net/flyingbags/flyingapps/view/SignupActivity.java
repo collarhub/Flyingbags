@@ -2,6 +2,7 @@ package net.flyingbags.flyingapps.view;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -124,12 +125,20 @@ public class SignupActivity extends AppCompatActivity implements LoginPresenter.
 
     @Override
     public void onCreateUserSuccess() {
+        this.startActivity(new Intent(this, MainActivity.class));
         progressDialog.dismiss();
-        finish();
+        this.finish();
     }
 
     @Override
     public void onAuthAdminSuccess() {
 
+    }
+
+    @Override
+    public void onBackPressed(){
+        //super.onBackPressed();
+        this.startActivity(new Intent(this, LoginActivity.class));
+        this.finish();
     }
 }
