@@ -50,6 +50,13 @@
         </activity>
         <activity android:name=".view.AdminInvoiceRouteActivity">
         </activity>
+        <activity android:name=".view.ReportUsActivity">
+        </activity>
+        <activity android:name=".view.ContactUsActivity">
+        </activity>
+        <activity android:name=".view.PolicyActivity">
+        </activity>
+
 
     </application>
 

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView_ManageAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:padding="5dp"
+                android:text="Manage Account"
+                android:textColor="@color/gray4A"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_MyProfileSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:text="My Profile Settings"
+                android:textColor="@color/gray4A" />
+
+            <TextView
+                android:id="@+id/textView_ChangePassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:text="Change Password"
+                android:textColor="@color/gray4A" />
+
+            <Switch
+                android:id="@+id/switch_PushNotifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:text="Push Notifications"
+                android:textColor="@color/gray4A" />
+
+            <TextView
+                android:id="@+id/textView_Blank1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp" />
+
+            <TextView
+                android:id="@+id/textView_TechSupport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:padding="5dp"
+                android:text="Tech Support"
+                android:textColor="@color/gray4A"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_ReportaProblem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:text="Report a Problem"
+                android:textColor="@color/gray4A" />
+
+            <TextView
+                android:id="@+id/textView_ContactUs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:text="Contact Us"
+                android:textColor="@color/gray4A" />
+
+            <TextView
+                android:id="@+id/textView_TermsandConditions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:text="Terms and Conditions"
+                android:textColor="@color/gray4A" />
+
+            <TextView
+                android:id="@+id/textView_Blank2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp" />
+
+            <TextView
+                android:id="@+id/textView_Logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:text="Logout"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -18,6 +18,9 @@ public class LoginPresenter {
 
     public interface presenter {
         void createUser(String email, String password);
+
+        void createUser(String email, String password, String name, String address);
+
         void signIn(String email, String password);
 
         void authAdmin();

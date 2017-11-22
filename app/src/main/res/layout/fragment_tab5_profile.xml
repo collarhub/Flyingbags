@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/textView_NameTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:padding="5dp"
+                android:text="Name"
+                android:textColor="@color/gray4A"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_NameContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:text="@string/testname"
+                android:textColor="@color/gray4A" />
+
+            <TextView
+                android:id="@+id/textView_Blank1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp" />
+
+            <TextView
+                android:id="@+id/textView_EmailTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:padding="5dp"
+                android:text="E-mail"
+                android:textColor="@color/gray4A"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_EmailContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:text="ernest@flyingbags.net"
+                android:textColor="@color/gray4A" />
+
+            <TextView
+                android:id="@+id/textView_Blank2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp" />
+
+            <TextView
+                android:id="@+id/textView_BasicAddressTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:padding="5dp"
+                android:text="Basic Address"
+                android:textColor="@color/gray4A"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_BasicAddressContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:text="Seoul, Korea"
+                android:textColor="@color/gray4A" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
