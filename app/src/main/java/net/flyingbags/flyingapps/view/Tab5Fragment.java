@@ -45,35 +45,35 @@ public class Tab5Fragment extends Fragment{
     }
 
     private void getAddress(){
-        FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("address")
+        FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        String presentInfo = dataSnapshot.getValue(String.class);
+                        User presentInfo = dataSnapshot.getValue(User.class);
                         if (presentInfo != null) {
                             displayProfile(presentInfo);
                             //view.onGetInvoiceSuccess(invoice, presentInfo);
                         } else {
-                            displayProfile("");
+                            displayProfile(null);
                             //view.onGetInvoiceFailed();
                         }
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        displayProfile("");
+                        displayProfile(null);
                     }
                 });
     }
 
-    private void displayProfile(String address){
+    private void displayProfile(User mUser){
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
         if(user != null){
-            textView_NameContent.setText(user.getDisplayName());
+            textView_NameContent.setText(mUser.getName());
             textView_EmailContent.setText(user.getEmail());
-            textView_BasicAddressContent.setText(address);
+            textView_BasicAddressContent.setText(mUser.getAddress());
         }else{
             textView_NameContent.setText("null");
             textView_EmailContent.setText("null");
