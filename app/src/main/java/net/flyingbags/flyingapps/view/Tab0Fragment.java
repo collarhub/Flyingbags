@@ -235,7 +235,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                 bitmap.recycle();
                 bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.5549976, 126.9249692))
+                        .position(new LatLng(37.5543392, 126.9266584))
                         .title("3.3.1.S")
                         .icon(icon));
                 marker.setTag(new Shop(1, "3.3.1.S", "마포구 서교동 339-1", "서교동", R.drawable.three));
@@ -245,7 +245,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                 bitmap.recycle();
                 bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.5538075, 126.9212728))
+                        .position(new LatLng(37.5537021, 126.9235585))
                         .title("check#")
                         .icon(icon));
                 marker.setTag(new Shop(2, "check#", "마포구 홍익로10 푸르지오상가 139 140호", "서교동", R.drawable.checkshop));
@@ -255,7 +255,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                 bitmap.recycle();
                 bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.5542494, 126.9245967))
+                        .position(new LatLng(37.5542494,126.9267854))
                         .title("Another Awesome")
                         .icon(icon));
                 marker.setTag(new Shop(3, "Another Awesome", "마포구 서교동 339-3 새봄빌딩 102호", "서교동", R.drawable.anotherawesome));
@@ -265,7 +265,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                 bitmap.recycle();
                 bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.5541017, 126.9255936))
+                        .position(new LatLng(37.5541017, 126.9277823))
                         .title("Moi")
                         .icon(icon));
                 marker.setTag(new Shop(4, "Moi", "마포구 서교동 336-15 1층 Moi오이", "서교동", R.drawable.moi));
@@ -275,7 +275,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                 bitmap.recycle();
                 bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.5546768, 126.9243302))
+                        .position(new LatLng(37.5546768,126.9265189))
                         .title("by L")
                         .icon(icon));
                 marker.setTag(new Shop(5, "by L", "서울 마포구 와우산로 27길 38", "서교동", R.drawable.byl));
@@ -285,7 +285,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                 bitmap.recycle();
                 bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.5549583, 126.9237773))
+                        .position(new LatLng(37.5549583,126.925966))
                         .title("1#")
                         .icon(icon));
                 marker.setTag(new Shop(6, "1#", "서울 마포구 서교동 332-12", "서교동", R.drawable.oneshop));
@@ -295,7 +295,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                 bitmap.recycle();
                 bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.5554262, 126.9229183))
+                        .position(new LatLng(37.5554262,126.925107))
                         .title("ANUE")
                         .icon(icon));
                 marker.setTag(new Shop(7, "ANUE", "서울 마포구 서교동 347-17 1층", "서교동", R.drawable.anue));
@@ -305,12 +305,12 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                 bitmap.recycle();
                 bitmap = null;
                 Tab0Fragment.this.marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(37.5547195, 126.9309247))
+                        .position(new LatLng(37.5547195,126.9331188))
                         .title("첸트로")
                         .icon(icon));
                 marker.setTag(new Shop(8, "첸트로", "서울 마포구 노고산동 56-29", "노고산동", R.drawable.chen));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.554816, 126.924351)));
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(37.554816, 126.924351), 15);
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.555031, 126.928266)));
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(37.555031, 126.928266), 15);
                 googleMap.animateCamera(cameraUpdate);
                 googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
                     @Override

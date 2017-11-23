@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.flyingbags.flyingapps.R;
@@ -36,6 +37,7 @@ public class Tab3Fragment extends Fragment implements MainPresenter.view {
     private ArrayList<OrderListItem> arrayList;
     private MainService mainService;
     private ProgressDialog progressDialog;
+    private TextView textViewNoData;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -78,6 +80,7 @@ public class Tab3Fragment extends Fragment implements MainPresenter.view {
         listView.setAdapter(orderArrayAdapter);
 
         listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.header_order_confirm, null));
+        textViewNoData = (TextView)view.findViewById(R.id.textView_order_no_data);
 
         return view;
     }
