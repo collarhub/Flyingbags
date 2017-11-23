@@ -124,8 +124,18 @@ public class Tab1Fragment extends Fragment{
     }
 
     private void onGetInvoicesVectorSuccess(Vector<String> Invoices){
-        for(String temp : Invoices){
-            getInvoice(temp);
+        if(Invoices.size()>0) {
+            for (String temp : Invoices) {
+                getInvoice(temp);
+            }
+        }else{
+            Notimsg msg = new Notimsg();
+            msg.title = "There is no message.";
+            msg.content = "";
+            msg.timestamp = "";
+
+            mAdapter.addItem(msg);
+            mAdapter.notifyDataSetChanged();
         }
     }
 
