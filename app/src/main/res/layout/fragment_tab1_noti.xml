@@ -7,6 +7,10 @@
     <ListView
         android:id="@+id/ListView_onDelivery"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/grayD3"
+        android:dividerHeight="20dp"
+        android:divider="@color/grayD3"
+        android:padding="20dp" />
 
 </LinearLayout>
