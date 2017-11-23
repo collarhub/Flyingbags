@@ -214,12 +214,15 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
                         marker3 = marker;
-                        Shop shop = (Shop)marker.getTag();
-                        ((TextView)view.findViewById(R.id.textView_shop_name)).setText(shop.getId() + ". " + shop.getName());
-                        ((TextView)view.findViewById(R.id.textView_shop_address)).setText(shop.getAddress());
-                        ((TextView)view.findViewById(R.id.textView_shop_simple_address)).setText(shop.getSimpleAddress());
-                        ((ImageView)view.findViewById(R.id.imageView_shop_image)).setImageResource(shop.getDrawable());
-                        ((LinearLayout)view.findViewById(R.id.linearLayout_shop_info)).setVisibility(View.VISIBLE);
+                        if(marker.getTag() instanceof Shop) {
+                            marker3 = marker;
+                            Shop shop = (Shop) marker.getTag();
+                            ((TextView) view.findViewById(R.id.textView_shop_name)).setText(shop.getId() + ". " + shop.getName());
+                            ((TextView) view.findViewById(R.id.textView_shop_address)).setText(shop.getAddress());
+                            ((TextView) view.findViewById(R.id.textView_shop_simple_address)).setText(shop.getSimpleAddress());
+                            ((ImageView) view.findViewById(R.id.imageView_shop_image)).setImageResource(shop.getDrawable());
+                            ((LinearLayout) view.findViewById(R.id.linearLayout_shop_info)).setVisibility(View.VISIBLE);
+                        }
                         return false;
                     }
                 });
