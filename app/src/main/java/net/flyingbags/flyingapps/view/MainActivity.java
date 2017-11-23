@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
 
     @Override
     public void onGetInvoiceSuccess(String invoiceID, Invoice invoice) {
-        if(invoice.getStatus().equals("idle") || invoiceID.equals("9999000004")) {
+        if(invoice.getStatus().equals("idle") || invoiceID.equals("0100010001")) {
             Intent intent = new Intent(this, ScheduleDeliveryActivity.class);
             intent.putExtra("invoiceID", invoiceID);
             intent.putExtra("invoice", invoice);
