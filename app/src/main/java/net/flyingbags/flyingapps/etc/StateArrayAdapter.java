@@ -83,6 +83,7 @@ public class StateArrayAdapter extends ArrayAdapter {
             ((LinearLayout) convertView.findViewById(R.id.linearLayout_state_ready_header)).setVisibility(View.VISIBLE);
             ((LinearLayout) convertView.findViewById(R.id.linearLayout_state_ready_body)).setVisibility(View.VISIBLE);
             ((TextView) convertView.findViewById(R.id.textView_state_ready_date)).setText(stateListItem.getRoute().get("No0").getDate());
+            ((TextView) convertView.findViewById(R.id.textView_status_ready_message)).setText("Delivery was scheduled from " + stateListItem.getDeparture() + ".");
             if(stateListItem.getRoute().get("No1") != null) {
                 ((ImageView) convertView.findViewById(R.id.imageView_state_ready_header_bottom)).setVisibility(View.VISIBLE);
                 ((ImageView) convertView.findViewById(R.id.imageView_state_ready_body_stick)).setVisibility(View.VISIBLE);

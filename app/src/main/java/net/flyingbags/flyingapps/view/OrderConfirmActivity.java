@@ -125,7 +125,7 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
                                     .show();
                         }
                     }
-                }, 10000);
+                }, 20000);
             }
         });
     }

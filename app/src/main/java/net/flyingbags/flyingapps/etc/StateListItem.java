@@ -12,11 +12,13 @@ public class StateListItem {
     private String orderId;
     private String orderDate;
     private Map<String, Route> route;
+    private String departure;
 
-    public StateListItem(String orderId, String orderDate, Map<String,Route> route) {
+    public StateListItem(String orderId, String orderDate, Map<String,Route> route, String departure) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.route = route;
+        this.departure = departure;
     }
 
     public String getOrderId() {
@@ -41,5 +43,13 @@ public class StateListItem {
 
     public void setRoute(Map<String, Route> route) {
         this.route = route;
+    }
+
+    public String getDeparture() {
+        return departure;
+    }
+
+    public void setDeparture(String departure) {
+        this.departure = departure;
     }
 }

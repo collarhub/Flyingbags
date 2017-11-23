@@ -78,7 +78,7 @@ public class SignupActivity extends AppCompatActivity implements LoginPresenter.
                                         .show();
                             }
                         }
-                    }, 10000);
+                    }, 20000);
                 }
             }
         });

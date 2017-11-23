@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
                                 .show();
                     }
                 }
-            }, 10000);
+            }, 20000);
         }
         //mainService.getInvoice("9999000004");
     }

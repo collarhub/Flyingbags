@@ -167,6 +167,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
                             .show();
                 }
             }
-        }, 10000);
+        }, 20000);
     }
 }

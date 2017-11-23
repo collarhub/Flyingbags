@@ -73,7 +73,7 @@ public class Tab2Fragment extends Fragment implements MainPresenter.view {
                             .show();
                 }
             }
-        }, 10000);
+        }, 20000);
 
         return view;
     }
@@ -93,7 +93,7 @@ public class Tab2Fragment extends Fragment implements MainPresenter.view {
 
     @Override
     public void onGetInvoiceSuccess(String invoiceID, Invoice invoice) {
-        arrayList.add(new StateListItem(invoiceID, invoice.getOrderDate(), invoice.getRoute()));
+        arrayList.add(new StateListItem(invoiceID, invoice.getOrderDate(), invoice.getRoute(), invoice.getDeparture()));
         stateArrayAdapter.notifyDataSetChanged();
         progressDialog.dismiss();
     }

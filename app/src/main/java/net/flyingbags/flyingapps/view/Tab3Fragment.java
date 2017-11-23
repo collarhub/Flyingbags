@@ -70,7 +70,7 @@ public class Tab3Fragment extends Fragment implements MainPresenter.view {
                             .show();
                 }
             }
-        }, 10000);
+        }, 20000);
 
         orderArrayAdapter = new OrderArrayAdapter(getActivity(), R.layout.item_order, arrayList);
 
