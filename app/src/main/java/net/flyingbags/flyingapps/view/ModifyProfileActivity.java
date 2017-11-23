@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import net.flyingbags.flyingapps.R;
+import net.flyingbags.flyingapps.model.User;
 
 public class ModifyProfileActivity extends AppCompatActivity{
     private FirebaseAuth mAuth;
@@ -62,6 +63,17 @@ public class ModifyProfileActivity extends AppCompatActivity{
             }
         });
 
+        FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name").setValue(name)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d(TAG, "registerInvoiceOnMyList:onComplete:" + task.isSuccessful());
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User profile updated. (name)");
+                        }
+                    }
+                });
+
         FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("address").setValue(address)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -78,32 +90,32 @@ public class ModifyProfileActivity extends AppCompatActivity{
     }
 
     private void getAddress(){
-        FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("address")
+        FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        String presentInfo = dataSnapshot.getValue(String.class);
+                        User presentInfo = dataSnapshot.getValue(User.class);
                         if (presentInfo != null) {
                             displayProfile(presentInfo);
                         } else {
-                            displayProfile("");
+                            displayProfile(null);
                         }
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        displayProfile("");
+                        displayProfile(null);
                     }
                 });
     }
 
-    private void displayProfile(String address){
+    private void displayProfile(User mUser){
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
         if(user != null){
-            editText_NameContent.setText(user.getDisplayName());
-            editText_BasicAddressContent.setText(address);
+            editText_NameContent.setText(mUser.getName());
+            editText_BasicAddressContent.setText(mUser.getAddress());
         }
     }
 }

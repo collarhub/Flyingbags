@@ -56,7 +56,6 @@ public class LoginService implements LoginPresenter.presenter {
                         if (!task.isSuccessful()) {
                             view.onCreateUserFailed(task.getException().getMessage()); // create user failed
                         }else{
-                            view.onCreateUserSuccess(); // create user success, login complete.
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
 
                             FirebaseAuth.getInstance().getCurrentUser().updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -68,6 +67,17 @@ public class LoginService implements LoginPresenter.presenter {
                                 }
                             });
 
+                            FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name").setValue(name)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Log.d(TAG, "registerInvoiceOnMyList:onComplete:" + task.isSuccessful());
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "User profile updated. (name)");
+                                            }
+                                        }
+                                    });
+
                             FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("address").setValue(address)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -78,6 +88,8 @@ public class LoginService implements LoginPresenter.presenter {
                                             }
                                         }
                                     });
+
+                            view.onCreateUserSuccess(); // create user success, login complete.
                         }
                     }
                 });
