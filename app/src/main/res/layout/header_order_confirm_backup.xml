@@ -8,12 +8,11 @@
     android:paddingTop="25dp">
 
     <RadioGroup
-        android:layout_width="300dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:checkedButton="@+id/radioButton_my_order_recent"
-        android:orientation="horizontal"
-        android:id="@+id/radioGroup_my_order">
+        android:checkedButton="@+id/radioButton_my_order"
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/radioButton_my_order"
@@ -22,20 +21,9 @@
             android:layout_weight="1"
             android:background="@drawable/radio_myorder_left"
             android:button="@null"
-            android:text="History"
+            android:text="My Order"
             android:textAlignment="center"
-            android:textColor="@color/my_order_radio_text" />
-
-        <RadioButton
-            android:id="@+id/radioButton_my_order_recent"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:background="@drawable/radio_myorder_right"
-            android:button="@null"
-            android:text="Recent"
-            android:textAlignment="center"
-            android:textColor="@color/my_order_radio_text" />
+            android:textColor="@android:color/white" />
 
     </RadioGroup>
 </LinearLayout>

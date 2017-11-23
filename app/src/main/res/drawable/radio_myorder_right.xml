@@ -6,8 +6,8 @@
             <item>
                 <shape android:shape="rectangle">
                     <corners android:radius="10dp"
-                        android:topRightRadius="0dp"
-                        android:bottomRightRadius="0dp" />
+                        android:topLeftRadius="0dp"
+                        android:bottomLeftRadius="0dp" />
                     <solid android:color="@android:color/white" />
                     <stroke android:width="2dp"
                         android:color="#979797" />
@@ -21,8 +21,8 @@
             <item>
                 <shape android:shape="rectangle">
                     <corners android:radius="10dp"
-                        android:topRightRadius="0dp"
-                        android:bottomRightRadius="0dp"/>
+                        android:topLeftRadius="0dp"
+                        android:bottomLeftRadius="0dp"/>
                     <solid android:color="@color/colorPrimaryDark" />
                     <stroke android:width="2dp"
                         android:color="#979797" />

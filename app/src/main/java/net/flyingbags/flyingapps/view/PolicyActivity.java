@@ -13,6 +13,6 @@ public class PolicyActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_policy);
         WebView webView_policy = (WebView) findViewById(R.id.webView_policy);
-        webView_policy.loadUrl("http://flyingbags.net/PrivacyPolicy.html");
+        webView_policy.loadUrl("http://flyingbags.net/terms.html");
     }
 }

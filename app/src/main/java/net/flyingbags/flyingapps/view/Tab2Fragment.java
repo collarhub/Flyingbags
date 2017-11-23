@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.flyingbags.flyingapps.R;
@@ -33,6 +34,7 @@ public class Tab2Fragment extends Fragment implements MainPresenter.view {
     private ArrayList<StateListItem> arrayList;
     private MainService mainService;
     private ProgressDialog progressDialog;
+    private boolean validResultCheck = true;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,6 +66,8 @@ public class Tab2Fragment extends Fragment implements MainPresenter.view {
                                 public void onClick(DialogInterface dialog, int which) {
                                     try {
                                         progressDialog.dismiss();
+                                        validResultCheck = false;
+                                        onGetInvoicesVectorFailed();
                                     } catch (Exception e) {
                                     }
                                 }
@@ -80,27 +84,56 @@ public class Tab2Fragment extends Fragment implements MainPresenter.view {
 
     @Override
     public void onGetInvoicesVectorFailed() {
-        progressDialog.dismiss();
+        View view = getActivity().getLayoutInflater().inflate(R.layout.footer_my_order, null);
+        ((TextView)view.findViewById(R.id.textView_my_order_message)).setText("Data request error.");
+        listView.addFooterView(view);
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     @Override
     public void onGetInvoicesVectorSuccess(Vector<String> invoices) {
-        for(String invoiceID : invoices) {
-            mainService.getInvoice(invoiceID);
+        if(validResultCheck) {
+            for (String invoiceID : invoices) {
+                mainService.getInvoice(invoiceID);
+            }
+            if (invoices.size() == 0) {
+                View view = getActivity().getLayoutInflater().inflate(R.layout.footer_my_order, null);
+                ((TextView) view.findViewById(R.id.textView_my_order_message)).setText("No data found.");
+                listView.addFooterView(view);
+            }
         }
-        progressDialog.dismiss();
+        else {
+            validResultCheck = true;
+        }
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     @Override
     public void onGetInvoiceSuccess(String invoiceID, Invoice invoice) {
-        arrayList.add(new StateListItem(invoiceID, invoice.getOrderDate(), invoice.getRoute(), invoice.getDeparture()));
-        stateArrayAdapter.notifyDataSetChanged();
-        progressDialog.dismiss();
+        if(validResultCheck) {
+            arrayList.add(new StateListItem(invoiceID, invoice.getOrderDate(), invoice.getRoute(), invoice.getDeparture()));
+            stateArrayAdapter.notifyDataSetChanged();
+        }
+        else {
+            validResultCheck = true;
+        }
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     @Override
     public void onGetInvoiceFailed() {
-        progressDialog.dismiss();
+        View view = getActivity().getLayoutInflater().inflate(R.layout.footer_my_order, null);
+        ((TextView)view.findViewById(R.id.textView_my_order_message)).setText("Data request error.");
+        listView.addFooterView(view);
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     @Override

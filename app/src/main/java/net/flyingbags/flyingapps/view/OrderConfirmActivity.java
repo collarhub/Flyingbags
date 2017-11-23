@@ -45,6 +45,7 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
     private Invoice invoice;
     private MainService mainService;
     private ProgressDialog progressDialog;
+    private boolean validResultCheck = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,7 +91,7 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
         listView = (ListView) findViewById(R.id.list_order);
         listView.setAdapter(orderArrayAdapter);
 
-        listView.addHeaderView(getLayoutInflater().inflate(R.layout.header_order_confirm, null));
+        //listView.addHeaderView(getLayoutInflater().inflate(R.layout.header_order_confirm, null));
         listView.addFooterView(getLayoutInflater().inflate(R.layout.footer_order_confirm, null));
 
         buttonToCommit = (Button) findViewById(R.id.button_commit);
@@ -196,15 +197,22 @@ public class OrderConfirmActivity extends AppCompatActivity implements ActionBar
 
     @Override
     public void onRegisterInvoiceSuccess() {
-        Intent intent = new Intent(this, OrderCommitActivity.class);
-        intent.putExtra("estimated", invoice.getMaxDateExpected());
-        startActivityForResult(intent, ActionBarPresenter.REQUEST_CODE_TAB);
-        progressDialog.dismiss();
+        if(validResultCheck) {
+            Intent intent = new Intent(this, OrderCommitActivity.class);
+            intent.putExtra("estimated", invoice.getMaxDateExpected());
+            startActivityForResult(intent, ActionBarPresenter.REQUEST_CODE_TAB);
+            validResultCheck = false;
+        }
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     @Override
     public void onRegisterInvoiceFailed() {
         Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show();
-        progressDialog.dismiss();
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 }

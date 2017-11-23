@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
     private Button buttonSignIn;
     private ProgressDialog progressDialog;
     private Button buttonSignUp;
+    private boolean validResultCheck = true;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +114,10 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
 
     @Override
     public void onSignInSuccess() {
-        this.startActivity(new Intent(this, MainActivity.class));
+        if(validResultCheck) {
+            this.startActivity(new Intent(this, MainActivity.class));
+            validResultCheck = false;
+        }
         if(progressDialog != null) {
             progressDialog.dismiss();
         }
@@ -132,8 +136,13 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
 
     @Override
     public void onAuthAdminSuccess() {
-        this.startActivity(new Intent(this, AdminInvoiceListActivity.class));
-        progressDialog.dismiss();
+        if(validResultCheck) {
+            this.startActivity(new Intent(this, AdminInvoiceListActivity.class));
+            validResultCheck = false;
+        }
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+        }
         this.finish();
     }
 

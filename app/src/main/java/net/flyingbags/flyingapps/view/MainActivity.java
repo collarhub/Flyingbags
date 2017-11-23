@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
     private LinearLayout linearLayoutPlaceAutocompleteFragmentWrapper;
     private CustomPlaceAutocompleteFragment placeAutocompleteFragment;
     private EditText editTextSearch;
+    private boolean validResultCheck = true;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -280,16 +281,20 @@ public class MainActivity extends AppCompatActivity implements ActionBarPresente
 
     @Override
     public void onGetInvoiceSuccess(String invoiceID, Invoice invoice) {
-        if(invoice.getStatus().equals("idle") || invoiceID.equals("0100010001")) {
-            Intent intent = new Intent(this, ScheduleDeliveryActivity.class);
-            intent.putExtra("invoiceID", invoiceID);
-            intent.putExtra("invoice", invoice);
-            startActivityForResult(intent, ActionBarPresenter.REQUEST_CODE_TAB);
+        if(validResultCheck) {
+            if (invoice.getStatus().equals("idle") || invoiceID.equals("0100010001")) {
+                Intent intent = new Intent(this, ScheduleDeliveryActivity.class);
+                intent.putExtra("invoiceID", invoiceID);
+                intent.putExtra("invoice", invoice);
+                startActivityForResult(intent, ActionBarPresenter.REQUEST_CODE_TAB);
+            } else {
+                Toast.makeText(this, "Invalid QR Code!", Toast.LENGTH_SHORT).show();
+            }
+            validResultCheck = false;
         }
-        else {
-            Toast.makeText(this, "Invalid QR Code!", Toast.LENGTH_SHORT).show();
+        if(progressDialog != null) {
+            progressDialog.dismiss();
         }
-        progressDialog.dismiss();
     }
 
     @Override

@@ -32,6 +32,7 @@ public class SignupActivity extends AppCompatActivity implements LoginPresenter.
     private EditText editTextAddress;
     private TextView textViewMessage;
     private ProgressDialog progressDialog;
+    private boolean validResultCheck = true;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,13 +136,20 @@ public class SignupActivity extends AppCompatActivity implements LoginPresenter.
     @Override
     public void onCreateUserFailed(String errorMessage) {
         textViewMessage.setText("sign up failed\n" + errorMessage);
-        progressDialog.dismiss();
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     @Override
     public void onCreateUserSuccess() {
-        this.startActivity(new Intent(this, MainActivity.class));
-        progressDialog.dismiss();
+        if(validResultCheck) {
+            this.startActivity(new Intent(this, MainActivity.class));
+            validResultCheck = false;
+        }
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+        }
         this.finish();
     }
 
