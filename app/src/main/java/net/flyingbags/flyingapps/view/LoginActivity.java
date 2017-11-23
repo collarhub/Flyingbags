@@ -106,13 +106,17 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.v
     @Override
     public void onSignInFailed() {
         ((LinearLayout) findViewById(R.id.login_linear_forget)).setVisibility(View.VISIBLE);
-        progressDialog.dismiss();
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     @Override
     public void onSignInSuccess() {
         this.startActivity(new Intent(this, MainActivity.class));
-        progressDialog.dismiss();
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+        }
         this.finish();
     }
 
