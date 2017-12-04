@@ -50,6 +50,9 @@ import net.flyingbags.flyingapps.service.Tab0Service;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by User on 2017-10-09.
  */
@@ -65,6 +68,9 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
     private Marker marker;
     private Marker marker2;
     private Marker marker3;
+    private LinearLayout linearLayoutShopInfo;
+    private ShopViewDialog shopViewDialog;
+    private Shop shop;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -96,6 +102,22 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
             @Override
             public void onClick(View v) {
                 ((LinearLayout)view.findViewById(R.id.linearLayout_shop_info)).setVisibility(View.GONE);
+            }
+        });
+
+        linearLayoutShopInfo = (LinearLayout) view.findViewById(R.id.linearLayout_shop_info);
+        linearLayoutShopInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(shop != null) {
+                    if (shopViewDialog == null) {
+                        shopViewDialog = new ShopViewDialog(getActivity(), shop);
+                    }
+                    else {
+                        shopViewDialog.setShop(shop);
+                    }
+                    shopViewDialog.show();
+                }
             }
         });
 
@@ -216,7 +238,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                         marker3 = marker;
                         if(marker.getTag() instanceof Shop) {
                             marker3 = marker;
-                            Shop shop = (Shop) marker.getTag();
+                            shop = (Shop) marker.getTag();
                             ((TextView) view.findViewById(R.id.textView_shop_name)).setText(shop.getId() + ". " + shop.getName());
                             ((TextView) view.findViewById(R.id.textView_shop_address)).setText(shop.getAddress());
                             ((TextView) view.findViewById(R.id.textView_shop_simple_address)).setText(shop.getSimpleAddress());
@@ -229,6 +251,7 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                 Bitmap bitmap;
                 int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 35, getActivity().getResources().getDisplayMetrics());
                 int height = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 35, getActivity().getResources().getDisplayMetrics());
+                /*ArrayList<Integer> image;*/
                 // 3.3.1.S : 마포구 서교동 339-1
                 bitmap = resizeBitmap("shop1", width, height);
                 BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(bitmap);
@@ -238,7 +261,9 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                         .position(new LatLng(37.5543392, 126.9266584))
                         .title("3.3.1.S")
                         .icon(icon));
-                marker.setTag(new Shop(1, "3.3.1.S", "마포구 서교동 339-1", "서교동", R.drawable.three));
+                /*image = new ArrayList<Integer>();*/
+                marker.setTag(new Shop(1, "3.3.1.S", "마포구 서교동 339-1", "서교동", R.drawable.three, "010-7399-5284",
+                        new ArrayList<Integer>()));
                 // 체크# : 마포구 홍익로10 푸르지오상가 139 140호
                 bitmap = resizeBitmap("shop2", width, height);
                 icon = BitmapDescriptorFactory.fromBitmap(bitmap);
@@ -248,7 +273,17 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                         .position(new LatLng(37.5537021, 126.9235585))
                         .title("check#")
                         .icon(icon));
-                marker.setTag(new Shop(2, "check#", "마포구 홍익로10 푸르지오상가 139 140호", "서교동", R.drawable.checkshop));
+                /*image.clear();
+                image = new ArrayList<Integer>();
+                image.add(R.drawable.checkshop1);
+                image.add(R.drawable.checkshop2);
+                image.add(R.drawable.checkshop3);
+                image.add(R.drawable.checkshop4);
+                image.add(R.drawable.checkshop5);
+                image.add(R.drawable.checkshop6);*/
+                marker.setTag(new Shop(2, "check#", "마포구 홍익로10 푸르지오상가 139 140호", "서교동", R.drawable.checkshop, "02-334-7947",
+                        new ArrayList<Integer>(Arrays.asList(R.drawable.checkshop1, R.drawable.checkshop2, R.drawable.checkshop3,
+                                R.drawable.checkshop4, R.drawable.checkshop5, R.drawable.checkshop6))));
                 // 어나더어썸 : 마포구 서교동 339-3 새봄빌딩 102호
                 bitmap = resizeBitmap("shop3", width, height);
                 icon = BitmapDescriptorFactory.fromBitmap(bitmap);
@@ -258,7 +293,15 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                         .position(new LatLng(37.5542494,126.9267854))
                         .title("Another Awesome")
                         .icon(icon));
-                marker.setTag(new Shop(3, "Another Awesome", "마포구 서교동 339-3 새봄빌딩 102호", "서교동", R.drawable.anotherawesome));
+                /*image.clear();
+                image = new ArrayList<Integer>();
+                image.add(R.drawable.anotherawesome1);
+                image.add(R.drawable.anotherawesome2);
+                image.add(R.drawable.anotherawesome3);
+                image.add(R.drawable.anotherawesome4);*/
+                marker.setTag(new Shop(3, "Another Awesome", "마포구 서교동 339-3 새봄빌딩 102호", "서교동", R.drawable.anotherawesome, "010-2609-2834",
+                        new ArrayList<Integer>(Arrays.asList(R.drawable.anotherawesome1, R.drawable.anotherawesome2,
+                                R.drawable.anotherawesome3, R.drawable.anotherawesome4))));
                 // Moi오이 : 마포구 서교동 336-15 1층 Moi오이
                 bitmap = resizeBitmap("shop4", width, height);
                 icon = BitmapDescriptorFactory.fromBitmap(bitmap);
@@ -268,7 +311,10 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                         .position(new LatLng(37.5541017, 126.9277823))
                         .title("Moi")
                         .icon(icon));
-                marker.setTag(new Shop(4, "Moi", "마포구 서교동 336-15 1층 Moi오이", "서교동", R.drawable.moi));
+                /*image.clear();
+                image = new ArrayList<Integer>();*/
+                marker.setTag(new Shop(4, "Moi", "마포구 서교동 336-15 1층 Moi오이", "서교동", R.drawable.moi, "010-3858-1899",
+                        new ArrayList<Integer>()));
                 // 바이엘 : 서울 마포구 와우산로 27길 38
                 bitmap = resizeBitmap("shop5", width, height);
                 icon = BitmapDescriptorFactory.fromBitmap(bitmap);
@@ -278,7 +324,15 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                         .position(new LatLng(37.5546768,126.9265189))
                         .title("by L")
                         .icon(icon));
-                marker.setTag(new Shop(5, "by L", "서울 마포구 와우산로 27길 38", "서교동", R.drawable.byl));
+                /*image.clear();
+                image = new ArrayList<Integer>();
+                image.add(R.drawable.byl1);
+                image.add(R.drawable.byl2);
+                image.add(R.drawable.byl3);
+                image.add(R.drawable.byl4);*/
+                marker.setTag(new Shop(5, "by L", "서울 마포구 와우산로 27길 38", "서교동", R.drawable.byl, "010-4511-2151",
+                        new ArrayList<Integer>(Arrays.asList(R.drawable.byl1, R.drawable.byl2,
+                                R.drawable.byl3, R.drawable.byl4))));
                 // 1# : 서울 마포구 서교동 332-12
                 bitmap = resizeBitmap("shop6", width, height);
                 icon = BitmapDescriptorFactory.fromBitmap(bitmap);
@@ -288,7 +342,20 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                         .position(new LatLng(37.5549583,126.925966))
                         .title("1#")
                         .icon(icon));
-                marker.setTag(new Shop(6, "1#", "서울 마포구 서교동 332-12", "서교동", R.drawable.oneshop));
+                /*image.clear();
+                image = new ArrayList<Integer>();
+                image.add(R.drawable.oneshop1);
+                image.add(R.drawable.oneshop2);
+                image.add(R.drawable.oneshop3);
+                image.add(R.drawable.oneshop4);
+                image.add(R.drawable.oneshop5);
+                image.add(R.drawable.oneshop6);
+                image.add(R.drawable.oneshop7);
+                image.add(R.drawable.oneshop8);*/
+                marker.setTag(new Shop(6, "1#", "서울 마포구 서교동 332-12", "서교동", R.drawable.oneshop, "010-6288-9239",
+                        new ArrayList<Integer>(Arrays.asList(R.drawable.oneshop1, R.drawable.oneshop2, R.drawable.oneshop3,
+                                R.drawable.oneshop4, R.drawable.oneshop5, R.drawable.oneshop6,
+                                R.drawable.oneshop7, R.drawable.oneshop8))));
                 // ANUE : 서울 마포구 서교동 347-17 1층
                 bitmap = resizeBitmap("shop7", width, height);
                 icon = BitmapDescriptorFactory.fromBitmap(bitmap);
@@ -298,7 +365,16 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                         .position(new LatLng(37.5554262,126.925107))
                         .title("ANUE")
                         .icon(icon));
-                marker.setTag(new Shop(7, "ANUE", "서울 마포구 서교동 347-17 1층", "서교동", R.drawable.anue));
+                /*image.clear();
+                image = new ArrayList<Integer>();
+                image.add(R.drawable.anue1);
+                image.add(R.drawable.anue2);
+                image.add(R.drawable.anue3);
+                image.add(R.drawable.anue4);
+                image.add(R.drawable.anue5);*/
+                marker.setTag(new Shop(7, "ANUE", "서울 마포구 서교동 347-17 1층", "서교동", R.drawable.anue, "010-3214-2348",
+                        new ArrayList<Integer>(Arrays.asList(R.drawable.anue1, R.drawable.anue2, R.drawable.anue3,
+                                R.drawable.anue4, R.drawable.anue5))));
                 // 첸트로 : 서울 마포구 노고산동 56-29
                 bitmap = resizeBitmap("shop8", width, height);
                 icon = BitmapDescriptorFactory.fromBitmap(bitmap);
@@ -308,7 +384,10 @@ public class Tab0Fragment extends Fragment implements Tab0Presenter.view {
                         .position(new LatLng(37.5547195,126.9331188))
                         .title("첸트로")
                         .icon(icon));
-                marker.setTag(new Shop(8, "첸트로", "서울 마포구 노고산동 56-29", "노고산동", R.drawable.chen));
+                /*image.clear();
+                image = new ArrayList<Integer>();*/
+                marker.setTag(new Shop(8, "첸트로", "서울 마포구 노고산동 56-29", "노고산동", R.drawable.chen, "",
+                        new ArrayList<Integer>()));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(37.555031, 126.928266)));
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(37.555031, 126.928266), 15);
                 googleMap.animateCamera(cameraUpdate);

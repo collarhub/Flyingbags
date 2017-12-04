@@ -1,5 +1,7 @@
 package net.flyingbags.flyingapps.etc;
 
+import java.util.ArrayList;
+
 /**
  * Created by User on 2017-11-23.
  */
@@ -10,13 +12,17 @@ public class Shop {
     private String address;
     private String simpleAddress;
     private int drawable;
+    private String tel;
+    private ArrayList<Integer> image;
 
-    public Shop(int id, String name, String address, String simpleAddress, int drawable) {
+    public Shop(int id, String name, String address, String simpleAddress, int drawable, String tel, ArrayList<Integer> image) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.simpleAddress = simpleAddress;
         this.drawable = drawable;
+        this.tel = tel;
+        this.image = image;
     }
 
     public int getId() {
@@ -57,5 +63,21 @@ public class Shop {
 
     public void setDrawable(int drawable) {
         this.drawable = drawable;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public ArrayList<Integer> getImage() {
+        return image;
+    }
+
+    public void setImage(ArrayList<Integer> image) {
+        this.image = image;
     }
 }
